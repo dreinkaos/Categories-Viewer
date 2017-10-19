@@ -5,11 +5,13 @@ import { AppComponent } from './app.component';
 import { SqlServerService } from './sql-server.service';
 import { TreeModule } from 'angular-tree-component';
 import { ValueByKeyPipe } from './value-by-key.pipe';
+import { ArticleComponent } from './article/article.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ValueByKeyPipe
+    ValueByKeyPipe,
+    ArticleComponent
   ],
   imports: [
     BrowserModule,

@@ -2,16 +2,16 @@
   <h1>
     Welcome to {{title}}!
   </h1>
-  <tree-root [(nodes)]="nodes">
+  <tree-root [(nodes)]="nodes" (activate)="setSelectedNode($event)">
       <ng-template #treeNodeTemplate let-node let-index="index">
           <span *ngIf="node.data.children">   
               <span>{{ node.data.name  | valueByKey: categories[node.data.type] }}</span>
           </span>          
           <span *ngIf="!node.data.children">    
-              {{ node.data.article | json }}        
               <span>{{ node.data.article.ARDESART }} (codice {{ node.data.article.ARCODART }})</span>
-              <button (click)="clickEvent($event, node.data)">click me</button>         
+              <!--button (click)="clickEvent($event, node.data)">click me</button--> 
           </span>
       </ng-template>
   </tree-root>     
+  <article [node]="selectedNode" [categories]="categories"></article>  
 </div>

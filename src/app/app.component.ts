@@ -12,6 +12,7 @@ export class AppComponent implements OnInit {
   secondLevel = 'ARCODFAM'; //famiglia
   thirdLevel = 'ARGRUMER'; //gruppo merceologico
   items = [];
+  selectedNode: any;
   categories = {rootLevel:[], secondLevel:[], thirdLevel:[] };
    
 
@@ -33,10 +34,11 @@ export class AppComponent implements OnInit {
     this.generateTree();
   }
 
-  clickEvent(event, nodedata){
-    console.log(nodedata);
+  setSelectedNode(event){
+    this.selectedNode = event.node;
+    console.log(event);
   }
-
+  
   getData(): void {
     Promise.all([
       this.sqlService.getItems().then(data => this.items = data),
