@@ -6,10 +6,46 @@ import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class SqlServerService {
 
+  private address: string = "http://localhost:3000";
   constructor(private http: Http) { }
 
   getItems(): Promise<any[]> {
-    return this.http.get("http://localhost:3000/getItems")
+    return this.http.get(this.address + "/getItems")
+    .toPromise()
+    .then(response => response.json())
+    .catch(this.handleError);
+  }  
+
+  getAccountingCategories(): Promise<any[]> {
+    return this.http.get(this.address + "/getAccountingCategories")
+    .toPromise()
+    .then(response => response.json())
+    .catch(this.handleError);
+  }
+
+  getAnaliticCategories(): Promise<any[]> {
+    return this.http.get(this.address + "/getAnaliticCategories")
+    .toPromise()
+    .then(response => response.json())
+    .catch(this.handleError);
+  }
+
+  getFamilyCategories(): Promise<any[]> {
+    return this.http.get(this.address + "/getFamilyCategories")
+    .toPromise()
+    .then(response => response.json())
+    .catch(this.handleError);
+  }
+
+  getHomogeneousCategories(): Promise<any[]> {
+    return this.http.get(this.address + "/getHomogeneousCategories")
+    .toPromise()
+    .then(response => response.json())
+    .catch(this.handleError);
+  }
+
+  getMerceologicalCategories(): Promise<any[]> {
+    return this.http.get(this.address + "/getMerceologicalCategories")
     .toPromise()
     .then(response => response.json())
     .catch(this.handleError);

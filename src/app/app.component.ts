@@ -1,21 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { SqlServerService } from './sql-server.service';
 
-
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'test with middleware service layer';
-  rootLevel  = 'ARCATOMO';
-  secondLevel = 'ARCODFAM';
-  thirdLevel = 'ARGRUMER';
-  
+  title = 'Ricategorizziamo!';
+  rootLevel  = 'ARCATOMO'; //categoria omogenea
+  secondLevel = 'ARCODFAM'; //famiglia
+  thirdLevel = 'ARGRUMER'; //gruppo merceologico
+  items = [];
+  categories = {rootLevel:[], secondLevel:[], thirdLevel:[] };
+   
 
-  data = [];
   columns = {
     "ARCODART" : {"label": "Codice articolo"},
     "ARDESART" : {"label": "Articolo"},
@@ -26,13 +25,12 @@ export class AppComponent implements OnInit {
     "ARCATOMO" : {"label": "Codice categoria omogenea"},
     "OMDESCRI" : {"label": "Categoria omogenea"}    
   };
-    
-  //nodes example
+
   nodes = [];  
   constructor(private sqlService: SqlServerService){}
 
   ngOnChanges(){
-    this.getData();
+    this.generateTree();
   }
 
   clickEvent(event, nodedata){
@@ -40,13 +38,20 @@ export class AppComponent implements OnInit {
   }
 
   getData(): void {
-    this.sqlService.getItems().then((data) => {
+    Promise.all([
+      this.sqlService.getItems().then(data => this.items = data),
+      this.sqlService.getFamilyCategories().then(data => this.categories[this.secondLevel] = data),
+      this.sqlService.getHomogeneousCategories().then(data => this.categories[this.rootLevel] = data),
+      this.sqlService.getMerceologicalCategories().then(data => this.categories[this.thirdLevel] = data)
+    ]).then(()=>this.generateTree());
+  }
+  generateTree(){    
       this.nodes = [];
       var temporaryDict = {};
-      for (var index in data){
-          var rootProperty: string = data[index][this.rootLevel];
-          var secondProperty: string = data[index][this.secondLevel];
-          var thirdProperty: string = data[index][this.thirdLevel];
+      for (var index in this.items){
+          var rootProperty: string = this.items[index][this.rootLevel];
+          var secondProperty: string = this.items[index][this.secondLevel];
+          var thirdProperty: string = this.items[index][this.thirdLevel];
           if (!(rootProperty in temporaryDict)){
             temporaryDict[rootProperty] = {};            
           }
@@ -56,32 +61,30 @@ export class AppComponent implements OnInit {
           if (!(thirdProperty in temporaryDict[rootProperty][secondProperty])){
             temporaryDict[rootProperty][secondProperty][thirdProperty] = [];            
           }
-          temporaryDict[rootProperty][secondProperty][thirdProperty].push(data[index]);
+          temporaryDict[rootProperty][secondProperty][thirdProperty].push(this.items[index]);
       }
-
       var counter = 0;
       for (var key in temporaryDict){   
-          counter += 1;       
-          var root = {id: counter, name: key, children: []};
+          counter += 1;                 
+          var root = {id: counter, name: key, children: [], type: this.rootLevel};
           for (var secondKey in temporaryDict[key]){
             counter += 1;
-            var second = {id:counter, name: secondKey, children: []};
+            var second = {id:counter, name: secondKey, children: [], type: this.secondLevel};
             for (var thirdKey in temporaryDict[key][secondKey]){
               counter += 1;
-              var third = {id:counter, name: thirdKey,  children: []};
+              var third = {id:counter, name: thirdKey,  children: [], type: this.thirdLevel};
               for (var articleKey in temporaryDict[key][secondKey][thirdKey]){
                 counter += 1;
                 var child = {id:counter, name:temporaryDict[key][secondKey][thirdKey][articleKey].ARCODART, article:temporaryDict[key][secondKey][thirdKey][articleKey]}
                 third.children.push(child);
-              }
-              
+              }              
               second.children.push(third);
             }
             root.children.push(second);
           }
           this.nodes.push(root);
       }
-    });
+    
   }  
 
   ngOnInit(): void {
