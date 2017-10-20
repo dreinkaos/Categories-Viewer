@@ -46,7 +46,6 @@ export class AppComponent implements OnInit {
   }
 
   onSelectedCategoryChange(node){
-    console.log(node);
     var type = node.type;
     var value = node.name;
     for (var index in this.items){
@@ -56,6 +55,9 @@ export class AppComponent implements OnInit {
         } 
         if (node[AppConfigurations.SECONDLEVEL]){
           this.items[index][AppConfigurations.SECONDLEVEL] = node[AppConfigurations.SECONDLEVEL]
+        } 
+        if (node[AppConfigurations.THIRDLEVEL]){
+          this.items[index][AppConfigurations.THIRDLEVEL] = node[AppConfigurations.THIRDLEVEL]
         } 
       }
     }

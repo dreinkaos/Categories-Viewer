@@ -5,7 +5,7 @@
   <tree-root [(nodes)]="nodes" (activate)="setSelectedNode($event)">
       <ng-template #treeNodeTemplate let-node let-index="index">
           <span *ngIf="node.data.children">   
-              <span>{{ node.data.name  | valueByKey: categories[node.data.type] }}</span>
+              <span>({{node.data.name}}) - {{ node.data.name  | valueByKey: categories[node.data.type] }}</span>
           </span>          
           <span *ngIf="!node.data.children">    
               <span>{{ node.data.article.ARDESART }} (codice {{ node.data.article.ARCODART }})</span>              

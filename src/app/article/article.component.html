@@ -2,7 +2,7 @@
   <span *ngIf="node && node.data.article && node.isActive">
         <dropdown-with-filter label="Categoria omogenea:"
             [reference]="node.data.article[ROOTLEVEL]" 
-            [values]="categorieS[ROOTLEVEL]"
+            [values]="categories[ROOTLEVEL]"
             (selectionChanged)="onSelectChange($event, ROOTLEVEL) ">
         </dropdown-with-filter>
         <dropdown-with-filter label="Famiglia:"
