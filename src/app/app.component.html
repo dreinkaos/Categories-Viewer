@@ -13,4 +13,5 @@
       </ng-template>
   </tree-root>     
   <article [node]="selectedNode" [categories]="categories" (updateArticle)= "onSelectedArticleChange($event)"></article>  
+  <category [node]="selectedNode" [categories]="categories" (updateItemsCategory)= "onSelectedCategoryChange($event)"></category>       
 </div>

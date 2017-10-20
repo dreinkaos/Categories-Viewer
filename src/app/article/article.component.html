@@ -1,17 +1,20 @@
-<p>   
-  <span *ngIf="node &&  node.data.article && node.isActive">
-      Categoria omogenea:  
-      <select [(ngModel)]="node.data.article.ARCATOMO">
-          <option *ngFor="let item of categories.ARCATOMO" [value]="item.key">{{item.value}}</option>
-      </select>
-      Famiglia:
-      <select [(ngModel)]="node.data.article.ARCODFAM">
-          <option *ngFor="let item of categories.ARCODFAM" [value]="item.key">{{item.value}}</option>
-      </select>
-      Gruppo merceologico: 
-      <select [(ngModel)]="node.data.article.ARGRUMER">
-          <option *ngFor="let item of categories.ARGRUMER" [value]="item.key">{{item.value}}</option>
-      </select>  
+<div class="w3-container">   
+  <span *ngIf="node && node.data.article && node.isActive">
+        <dropdown-with-filter label="Categoria omogenea:"
+            [reference]="node.data.article[ROOTLEVEL]" 
+            [values]="categorieS[ROOTLEVEL]"
+            (selectionChanged)="onSelectChange($event, ROOTLEVEL) ">
+        </dropdown-with-filter>
+        <dropdown-with-filter label="Famiglia:"
+            [reference]="node.data.article[SECONDLEVEL]" 
+            [values]="categories[SECONDLEVEL]"
+            (selectionChanged)="onSelectChange($event, SECONDLEVEL) ">
+        </dropdown-with-filter>
+        <dropdown-with-filter label="Gruppo merceologico:"
+             [reference]="node.data.article[THIRDLEVEL]" 
+             [values]="categories[THIRDLEVEL]"
+             (selectionChanged)="onSelectChange($event, THIRDLEVEL) ">
+        </dropdown-with-filter>
       <button (click)="confirmChanges($event)">Conferma</button>
   </span>
-</p>
+</div>

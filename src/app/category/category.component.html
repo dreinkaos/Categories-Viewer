@@ -1,0 +1,18 @@
+<div class="w3-container">   
+    <span *ngIf="node && node.data.children && node.isActive">
+          <dropdown-with-filter label="Categoria omogenea:"
+              [reference]="node.data[ROOTLEVEL]" 
+              [values]="categories[ROOTLEVEL]"
+              (selectionChanged)="onSelectChange($event, ROOTLEVEL) "
+              *ngIf="node.data.type == SECONDLEVEL">
+          </dropdown-with-filter>
+          <dropdown-with-filter label="Famiglia:"
+              [reference]="node.data[SECONDLEVEL]" 
+              [values]="categories[SECONDLEVEL]"
+              (selectionChanged)="onSelectChange($event, SECONDLEVEL)"
+              *ngIf="node.data.type == THIRDLEVEL">
+          </dropdown-with-filter>          
+        <button (click)="confirmChanges($event)">Conferma</button>
+    </span>
+  </div>
+  

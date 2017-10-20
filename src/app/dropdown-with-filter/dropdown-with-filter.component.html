@@ -1,0 +1,6 @@
+<div>
+  <input type="text" [(ngModel)]="filter" placeholder="Filtra {{ label }}">
+  <select [(ngModel)]="reference" (ngModelChange)="onSelectChange($event)">
+      <option *ngFor="let item of values | filterOptionsByValue:filter" [value]="item.key">{{item.value}}</option>
+  </select>  
+</div>
