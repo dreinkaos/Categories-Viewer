@@ -4,7 +4,7 @@
               [reference]="node.data[ROOTLEVEL]" 
               [values]="categories[ROOTLEVEL]"
               (selectionChanged)="onSelectChange($event, ROOTLEVEL) "
-              *ngIf="node.data.type == SECONDLEVEL">
+              *ngIf="node.data.type == SECONDLEVEL || node.data.type == THIRDLEVEL">
           </dropdown-with-filter>
           <dropdown-with-filter label="Famiglia:"
               [reference]="node.data[SECONDLEVEL]" 
