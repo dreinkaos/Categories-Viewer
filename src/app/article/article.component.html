@@ -1,17 +1,17 @@
 <p>   
   <span *ngIf="node &&  node.data.article && node.isActive">
-      {{ node.data | json }}
       Categoria omogenea:  
-      <select>
+      <select [(ngModel)]="node.data.article.ARCATOMO">
           <option *ngFor="let item of categories.ARCATOMO" [value]="item.key">{{item.value}}</option>
       </select>
       Famiglia:
-      <select>
+      <select [(ngModel)]="node.data.article.ARCODFAM">
           <option *ngFor="let item of categories.ARCODFAM" [value]="item.key">{{item.value}}</option>
       </select>
       Gruppo merceologico: 
-      <select >
+      <select [(ngModel)]="node.data.article.ARGRUMER">
           <option *ngFor="let item of categories.ARGRUMER" [value]="item.key">{{item.value}}</option>
-      </select>      
+      </select>  
+      <button (click)="confirmChanges($event)">Conferma</button>
   </span>
 </p>

@@ -8,10 +8,9 @@
               <span>{{ node.data.name  | valueByKey: categories[node.data.type] }}</span>
           </span>          
           <span *ngIf="!node.data.children">    
-              <span>{{ node.data.article.ARDESART }} (codice {{ node.data.article.ARCODART }})</span>
-              <!--button (click)="clickEvent($event, node.data)">click me</button--> 
+              <span>{{ node.data.article.ARDESART }} (codice {{ node.data.article.ARCODART }})</span>              
           </span>
       </ng-template>
   </tree-root>     
-  <article [node]="selectedNode" [categories]="categories"></article>  
+  <article [node]="selectedNode" [categories]="categories" (updateArticle)= "onSelectedArticleChange($event)"></article>  
 </div>

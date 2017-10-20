@@ -1,0 +1,7 @@
+{
+    "compilerOptions": {
+        "experimentalDecorators": true, //allow usage of decorators without typings error
+        "allowJs": true, //allow usage of decorators without typings error
+        "lib": ["es2017", "dom"] //avoid Promise typings error on its static method
+    }
+}

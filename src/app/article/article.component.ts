@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter  } from '@angular/core';
 
 @Component({
   selector: 'article',
@@ -9,8 +9,13 @@ export class ArticleComponent implements OnInit {
 
   @Input() node;
   @Input() categories;
-  
+  @Output() updateArticle = new EventEmitter<boolean>();
+
   constructor() {}
+
+  confirmChanges(event){
+    this.updateArticle.emit(this.node.data.article);
+  }
 
   ngOnInit() {
   }

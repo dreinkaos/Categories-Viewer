@@ -33,10 +33,18 @@ export class AppComponent implements OnInit {
   ngOnChanges(){
     this.generateTree();
   }
+  onSelectedArticleChange(value){
+    for (var index in this.items){
+      if (this.items[index].ARCODART === value.ARCODART){
+        this.items[index] = value;
+        break;
+      }
+    }
+    this.generateTree();
+  }
 
   setSelectedNode(event){
-    this.selectedNode = event.node;
-    console.log(event);
+    this.selectedNode = event.node;    
   }
   
   getData(): void {
@@ -85,8 +93,7 @@ export class AppComponent implements OnInit {
             root.children.push(second);
           }
           this.nodes.push(root);
-      }
-    
+      }    
   }  
 
   ngOnInit(): void {
