@@ -13,3 +13,31 @@
         "OMDESCRI" : {"label": "Categoria omogenea"}    
       }
  }
+
+/*
+ export const AppConfigurations = {
+  rootLevel: {
+    name: 'ARCATOMO',
+    label: "Categoria omogenea",
+    resource: "homogeneousCategories"
+},
+
+secondLevel: {
+  name: 'ARCODFAM',
+  label: "Famiglia",
+  resource: "familyCategories"
+},
+
+thirdLevel: {
+  name: 'ARGRUMER',
+  label: "Gruppo merceologico",
+  resource: "merceologicalCategories"
+},
+
+article: {
+  name: 'ARCODART',
+  label: "Articolo",
+  resource: "articles"
+}
+  
+ }*/

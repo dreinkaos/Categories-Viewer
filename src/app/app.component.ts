@@ -87,12 +87,15 @@ export class AppComponent implements OnInit {
   }
 
   saveCategories(){
-    this.sqliteService.saveNewCategories(this.newItems);    
+    this.sqliteService.setBasicResource("articles", this.newItems);    
+    this.sqliteService.setBasicResource("homogeneousCategories", this.categories[this.ROOTLEVEL]);
+    this.sqliteService.setBasicResource("familyCategories", this.categories[this.SECONDLEVEL]);
+    this.sqliteService.setBasicResource("merceologicalCategories", this.categories[this.THIRDLEVEL]);    
   }
   
   private getData(): void {
     Promise.all([
-      this.sqliteService.getItems().then(data => this.newItems = data),
+      this.sqliteService.getBasicResource("articles").then(data => this.newItems = data),
       this.sqlService.getItems().then(data => this.originalItems = data),
       this.sqlService.getHomogeneousCategories().then(data => this.categories[this.ROOTLEVEL] = data),
       this.sqlService.getFamilyCategories().then(data => this.categories[this.SECONDLEVEL] = data),      
@@ -100,8 +103,7 @@ export class AppComponent implements OnInit {
     ]).then(()=>{
       this.originalItemsDictionary = this.dictionaryFromData(this.originalItems);
       if (this.isEmptyObject(this.newItems)){
-         this.newItems = JSON.parse(JSON.stringify(this.originalItems));
-         console.log("here");
+         this.newItems = JSON.parse(JSON.stringify(this.originalItems));         
       }
       this.newItemsDictionary = this.dictionaryFromData(this.newItems);
     });

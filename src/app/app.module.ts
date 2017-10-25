@@ -16,6 +16,7 @@ import { MatTabsModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ModifyCategoriesComponent } from './modify-categories/modify-categories.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     DropdownWithFilterComponent,
     FilterOptionsByValuePipe,
     CategoryComponent,
-    CategoriesTreeComponent
+    CategoriesTreeComponent,
+    ModifyCategoriesComponent
     
   ],
   imports: [

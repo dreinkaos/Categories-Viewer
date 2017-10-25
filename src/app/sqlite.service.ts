@@ -7,16 +7,18 @@ export class SqliteService {
   private address: string = "http://localhost:3000";
   constructor(private http: Http) { }
 
-  getItems(): Promise<any[]> {
-    return this.http.get(this.address + "/getLatestCategoriesSaved")
+  getBasicResource(resourceName: string): Promise<any[]> {
+    var fullResourceName: string = this.getResourceWebServiceName(resourceName, 'get');
+    return this.http.get(fullResourceName)
     .toPromise()
     .then(response => response.json())
     .catch(this.handleError);
   }  
 
-  saveNewCategories(categories:any): Promise<boolean>{
-    const body = {categories: categories};    
-    return this.http.post(this.address + "/saveNewCategories", body)
+  setBasicResource(resourceName: string, resource: any): Promise<boolean>{
+    var fullResourceName: string = this.getResourceWebServiceName(resourceName, 'set');
+    const body = {value: resource};    
+    return this.http.post(fullResourceName, body)
     .toPromise()
     .then(response => response.json())
     .catch(this.handleError);
@@ -25,5 +27,13 @@ export class SqliteService {
   private handleError(error: any): Promise<any> {
     console.error('An error occurred', error); // for demo purposes only
     return Promise.reject(error.message || error);
+  }
+
+  private getResourceWebServiceName(resourceName: string, requestType: string): string{
+    return this.address + '/' + requestType + "New" + this.capitalizeFirst(resourceName);
+  }
+
+  private capitalizeFirst(name: string): string{
+    return name.charAt(0).toUpperCase() + name.substr(1).toLowerCase();
   }
 }
