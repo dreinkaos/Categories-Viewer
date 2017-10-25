@@ -18,6 +18,7 @@ export class CategoriesTreeComponent implements OnInit {
 
   @Input() data;
   @Input() categories;
+  @Input() readOnly?: boolean;
   @Output() updateItemsCategoryInParent = new EventEmitter<boolean>();
 
   constructor() { }

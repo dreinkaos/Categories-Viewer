@@ -9,7 +9,7 @@
         </mat-tab>
         <mat-tab label="Categorie AD HOC">
             <div class="demo-tab-content">
-                <categories-tree [data]="originalItemsDictionary" [categories]="categories" (updateItemsCategoryInParent)="onSelectedCategoryChange($event)"></categories-tree>
+                <categories-tree [data]="originalItemsDictionary" [categories]="categories" (updateItemsCategoryInParent)="onSelectedCategoryChange($event)" [readOnly]="true"></categories-tree>
             </div>  
         </mat-tab>
     </mat-tab-group>      

@@ -12,7 +12,7 @@
             </span>
         </ng-template>
     </tree-root> 
-    <span class="box">
+    <span class="box" *ngIf="!readOnly">
         <article [node]="selectedNode" [categories]="categories" (updateArticle)= "onSelectedArticleChange($event)"></article>  
         <category [node]="selectedNode" [categories]="categories" (updateItemsCategory)= "updateItemsCategory($event)"></category>       
     </span>
