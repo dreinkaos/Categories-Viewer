@@ -5,9 +5,11 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class ValueByKeyPipe implements PipeTransform {
   transform(key: string, values: any[]): string {
-    var translation = values.find(v => v.key === key);    
-    if (translation){
-      return translation.value;
+    if (values){
+      var translation = values.find(v => v.key === key);    
+      if (translation){
+        return translation.value;
+      }
     }
     return key;      
   }

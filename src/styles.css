@@ -1,3 +1,31 @@
 @import '~angular-tree-component/dist/angular-tree-component.css';
 @import 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap-flex.min.css';
 @import 'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css';
+@import 'https://unpkg.com/@angular/material/prebuilt-themes/indigo-pink.css';
+@import 'https://fonts.googleapis.com/icon?family=Material+Icons';
+
+.tree-node-active {
+    font-weight: bold;
+}
+
+.tree-node-active .title{
+    font-weight: normal;    
+}
+
+.title {
+    font-style: italic;
+}
+
+.box {
+    display:inline-block;
+    padding: 1em;    
+}
+
+.demo-tab-group {
+    border: 1px solid #e8e8e8;
+  }
+  
+.demo-tab-content {
+    padding: 16px;
+}
+  

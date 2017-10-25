@@ -1,17 +1,17 @@
 <div class="w3-container">   
     <span *ngIf="node && node.data.children && node.isActive">
-          <dropdown-with-filter label="Categoria omogenea:"
+          <dropdown-with-filter label="Categoria omogenea"
               [reference]="node.data[ROOTLEVEL]" 
               [values]="categories[ROOTLEVEL]"
               (selectionChanged)="onSelectChange($event, ROOTLEVEL)">
           </dropdown-with-filter>
-          <dropdown-with-filter label="Famiglia:"
+          <dropdown-with-filter label="Famiglia"
               [reference]="node.data[SECONDLEVEL]" 
               [values]="categories[SECONDLEVEL]"
               (selectionChanged)="onSelectChange($event, SECONDLEVEL)"
               *ngIf="node.data.type == SECONDLEVEL || node.data.type == THIRDLEVEL">
           </dropdown-with-filter>   
-          <dropdown-with-filter label="Gruppo merceologico:"
+          <dropdown-with-filter label="Gruppo merceologico"
             [reference]="node.data[THIRDLEVEL]" 
             [values]="categories[THIRDLEVEL]"
             (selectionChanged)="onSelectChange($event, THIRDLEVEL)"

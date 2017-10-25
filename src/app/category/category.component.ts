@@ -20,7 +20,8 @@ export class CategoryComponent implements OnInit {
   }
 
   confirmChanges(event){
-    this.updateItemsCategory.emit(this.node.data);
+    this.updateItemsCategory.emit(this.node);
+    this.node = undefined;
   }
 
   onSelectChange(value, reference){

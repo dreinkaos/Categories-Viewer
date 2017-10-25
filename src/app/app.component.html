@@ -1,17 +1,16 @@
 <div style="margin: 1em;">
-  <h1>
-    Welcome to {{title}}!
-  </h1>
-  <tree-root [(nodes)]="nodes" (activate)="setSelectedNode($event)">
-      <ng-template #treeNodeTemplate let-node let-index="index">
-          <span *ngIf="node.data.children">   
-              <span>({{node.data.name}}) - {{ node.data.name  | valueByKey: categories[node.data.type] }}</span>
-          </span>          
-          <span *ngIf="!node.data.children">    
-              <span>{{ node.data.article.ARDESART }} (codice {{ node.data.article.ARCODART }})</span>              
-          </span>
-      </ng-template>
-  </tree-root>     
-  <article [node]="selectedNode" [categories]="categories" (updateArticle)= "onSelectedArticleChange($event)"></article>  
-  <category [node]="selectedNode" [categories]="categories" (updateItemsCategory)= "onSelectedCategoryChange($event)"></category>       
+    <h1>Aggiornamento categorie</h1>
+    <mat-tab-group>
+        <mat-tab label="Nuove categorie">
+            <button type="button" (click)="saveCategories()">Save</button>
+            <div class="demo-tab-content">
+                <categories-tree [data]="newItemsDictionary" [categories]="categories" (updateItemsCategoryInParent)="onSelectedCategoryChange($event)"></categories-tree>
+            </div>
+        </mat-tab>
+        <mat-tab label="Categorie AD HOC">
+            <div class="demo-tab-content">
+                <categories-tree [data]="originalItemsDictionary" [categories]="categories" (updateItemsCategoryInParent)="onSelectedCategoryChange($event)"></categories-tree>
+            </div>  
+        </mat-tab>
+    </mat-tab-group>      
 </div>
