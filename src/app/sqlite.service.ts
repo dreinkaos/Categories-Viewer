@@ -8,17 +8,17 @@ export class SqliteService {
   constructor(private http: Http) { }
 
   getBasicResource(resourceName: string): Promise<any[]> {
-    var fullResourceName: string = this.getResourceWebServiceName(resourceName, 'get');
-    return this.http.get(fullResourceName)
+    var fullResourceServiceName: string = this.getResourceWebServiceName(resourceName, 'get');
+    return this.http.get(fullResourceServiceName)
     .toPromise()
     .then(response => response.json())
     .catch(this.handleError);
   }  
 
   setBasicResource(resourceName: string, resource: any): Promise<boolean>{
-    var fullResourceName: string = this.getResourceWebServiceName(resourceName, 'set');
+    var fullResourceServiceName: string = this.getResourceWebServiceName(resourceName, 'set');
     const body = {value: resource};    
-    return this.http.post(fullResourceName, body)
+    return this.http.post(fullResourceServiceName, body)
     .toPromise()
     .then(response => response.json())
     .catch(this.handleError);

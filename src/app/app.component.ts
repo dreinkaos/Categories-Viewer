@@ -87,10 +87,7 @@ export class AppComponent implements OnInit {
   }
 
   saveCategories(){
-    this.sqliteService.setBasicResource("articles", this.newItems);    
-    this.sqliteService.setBasicResource("homogeneousCategories", this.categories[this.ROOTLEVEL]);
-    this.sqliteService.setBasicResource("familyCategories", this.categories[this.SECONDLEVEL]);
-    this.sqliteService.setBasicResource("merceologicalCategories", this.categories[this.THIRDLEVEL]);    
+    this.sqliteService.setBasicResource("articles", this.newItems);      
   }
   
   private getData(): void {
