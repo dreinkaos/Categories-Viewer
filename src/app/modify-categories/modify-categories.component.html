@@ -6,7 +6,6 @@
 <mat-form-field floatPlaceholder="never">
     <input matInput #filter placeholder="Filtra categoria per valore">    
 </mat-form-field>  
-
 <mat-radio-group [(ngModel)]="isActive">
   <mat-radio-button [value]="true">
     Attivo
@@ -15,11 +14,11 @@
     Non attivo
   </mat-radio-button>
   <mat-radio-button [value]="undefined">
-    Tutto
+    Tutti
   </mat-radio-button>
 </mat-radio-group>
 
-<button (click)="save()">Salva</button>
+<button (click)="save()" mat-raised-button>Salva</button>
 <table>
   <th>Chiave</th><th>Valore</th><th>Tags</th><th>Attivo</th>
   <tr *ngFor="let category of categories[selectedCategory] | filterOptionsByValue | filterOptionsByState:isActive"

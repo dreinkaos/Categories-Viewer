@@ -1,5 +1,9 @@
 @import '~angular-tree-component/dist/angular-tree-component.css';
-@import 'https://unpkg.com/@angular/material/prebuilt-themes/indigo-pink.css';
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+
+$themeColor: #4571a7;
+$acceptColor: #66bb66;
+$rejectColor: #d8515c;
 
 .tree-node-active {
     font-weight: bold;
@@ -26,20 +30,28 @@
     padding: 16px;
 }
 
-.mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-bar
+.mat-button, .mat-icon-button, .mat-raised-button{
+    background-color: $themeColor;    
+}
+.mat-button-wrapper {
+    
+    font-weight: bold
+}
+
+.mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-bar,
 {
-    background-color: rgb(102, 187, 102);
+    background-color: $acceptColor;
 }
 .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-thumb
 {
-    background-color: rgb(102, 187, 102);
+    background-color: $acceptColor;
 }
   
 .mat-slide-toggle:not(.mat-checked):not(.mat-disabled) .mat-slide-toggle-bar
 {
-    background-color: rgb(216, 81, 92);
+    background-color: $rejectColor;
 }
 .mat-slide-toggle:not(.mat-checked):not(.mat-disabled) .mat-slide-toggle-thumb
 {
-    background-color: rgb(216, 81, 92);
+    background-color: $rejectColor;
 }

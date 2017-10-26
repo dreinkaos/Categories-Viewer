@@ -12,14 +12,14 @@ import { DropdownWithFilterComponent } from './dropdown-with-filter/dropdown-wit
 import { FilterOptionsByValuePipe } from './filter-options-by-value.pipe';
 import { CategoryComponent } from './category/category.component';
 import { CategoriesTreeComponent } from './categories-tree/categories-tree.component';
-import { MatTabsModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatSlideToggleModule, MatRadioModule } from '@angular/material';
+import { MatTabsModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatSlideToggleModule, MatRadioModule, MatButtonModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ModifyCategoriesComponent } from './modify-categories/modify-categories.component';
 import { FilterOptionsByStatePipe } from './filter-options-by-state.pipe';
 
-@NgModule({
+@NgModule({ 
   declarations: [
     AppComponent,
     ValueByKeyPipe,
@@ -43,7 +43,8 @@ import { FilterOptionsByStatePipe } from './filter-options-by-state.pipe';
     MatInputModule,
     MatSelectModule,
     MatSlideToggleModule,
-    MatRadioModule
+    MatRadioModule,
+    MatButtonModule
   ],
   providers: [SqlServerService, SqliteService],
   bootstrap: [AppComponent]
