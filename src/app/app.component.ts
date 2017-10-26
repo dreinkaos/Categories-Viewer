@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SqlServerService } from './sql-server.service';
 import { SqliteService } from './sqlite.service';
 import { AppConfigurations } from './app-config';
+import { Subject } from 'rxjs/Subject';
 
 @Component({
   selector: 'app-root',
@@ -20,8 +21,14 @@ export class AppComponent implements OnInit {
   newItemsDictionary = {};
   selectedNode: any;
   nodes = [];  
+
+  parentSubject:Subject<any> = new Subject();
   
   constructor(private sqlService: SqlServerService, private sqliteService: SqliteService){}
+
+  pageChanged() {
+    this.parentSubject.next('Page changed');
+  }
 
   onSelectedArticleChange(value){
     for (var index in this.newItems){
@@ -134,8 +141,8 @@ export class AppComponent implements OnInit {
       else if (category == 'ARCODFAM'){
         serviceName = "familyCategories";
       }
-      this.categories[category] = categories[category];
-      this.sqliteService.setBasicResource(serviceName, this.categories[category]); 
+      //Object.assign(this.categories[category], categories[category]);
+      this.sqliteService.setBasicResource(serviceName, this.categories[category]).then(()=>this.categories[category] = categories[category]); 
     }    
   }
   
@@ -154,7 +161,8 @@ export class AppComponent implements OnInit {
       if (this.isEmptyObject(this.newItems)){
          this.newItems = JSON.parse(JSON.stringify(this.originalItems));         
       }
-      this.newItemsDictionary = this.dictionaryFromData(this.newItems);      
+      this.newItemsDictionary = this.dictionaryFromData(this.newItems);
+      //this.setActiveCategories();      
     });
   }
 

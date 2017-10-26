@@ -2,9 +2,13 @@
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
 
 
-$themeColor: #4571a7;
+$themeColor: #618abd;
 $acceptColor: #66bb66;
 $rejectColor: #d8515c;
+
+body{
+    font-family: Roboto,"Helvetica Neue",sans-serif;
+}
 
 .tree-node-active {
     font-weight: bold;

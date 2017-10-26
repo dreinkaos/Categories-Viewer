@@ -1,8 +1,10 @@
 <div>
-    <mat-form-field floatPlaceholder="never">
+    <mat-form-field>
         <input matInput type="text" [(ngModel)]="filter" placeholder="Filtra {{ label }}">
-    </mat-form-field>  
-  <select [(ngModel)]="reference" (ngModelChange)="onSelectChange($event)">
-      <option *ngFor="let item of values | filterOptionsByValue:filter | filterOptionsByState:true" [value]="item.key">({{item.key}}) - {{item.value}}</option>
-  </select>  
+    </mat-form-field>
+    <mat-form-field>
+        <mat-select [(ngModel)]="reference" (ngModelChange)="onSelectChange($event)" placeholder="Scegli {{ label }}">
+            <mat-option *ngFor="let item of values | filterOptionsByValue:filter | filterOptionsByState:true" [value]="item.key">({{item.key}}) - {{item.value}}</mat-option>
+        </mat-select>
+    </mat-form-field>
 </div>

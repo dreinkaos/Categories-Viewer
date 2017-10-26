@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { AppConfigurations } from '../app-config';
+import { Subject } from 'rxjs/Subject';
 
 @Component({
   selector: 'categories-tree',
@@ -19,13 +20,19 @@ export class CategoriesTreeComponent implements OnInit {
   @Input() data;
   @Input() categories;
   @Input() readOnly?: boolean;
+  @Input() parentSubject:Subject<any>;
   @Output() updateItemsCategoryInParent = new EventEmitter<boolean>();
-
+  
   constructor() { }
 
   ngOnInit() {}
 
   ngOnChanges(){
+    if (this.parentSubject){
+        this.parentSubject.subscribe(event => {
+        this.selectedNode.setIsActive(false);        
+      });
+    }
     this.generateTree();    
   }
 

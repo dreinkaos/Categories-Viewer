@@ -1,20 +1,19 @@
-<div class="w3-container">   
-  <span *ngIf="node && node.data.article && node.isActive">
-        <dropdown-with-filter label="Categoria omogenea:"
-            [reference]="node.data.article[ROOTLEVEL]" 
-            [values]="categories[ROOTLEVEL]"
-            (selectionChanged)="onSelectChange($event, ROOTLEVEL) ">
-        </dropdown-with-filter>
-        <dropdown-with-filter label="Famiglia:"
-            [reference]="node.data.article[SECONDLEVEL]" 
-            [values]="categories[SECONDLEVEL]"
-            (selectionChanged)="onSelectChange($event, SECONDLEVEL) ">
-        </dropdown-with-filter>
-        <dropdown-with-filter label="Gruppo merceologico:"
-             [reference]="node.data.article[THIRDLEVEL]" 
-             [values]="categories[THIRDLEVEL]"
-             (selectionChanged)="onSelectChange($event, THIRDLEVEL) ">
-        </dropdown-with-filter>
-      <button (click)="confirmChanges($event)">Conferma</button>
-  </span>
-</div>
+<span *ngIf="node && node.data.article && node.isActive">
+    Cambia categorie per questo articolo
+    <dropdown-with-filter label="Categoria omogenea:"
+        [reference]="node.data.article[ROOTLEVEL]" 
+        [values]="categories[ROOTLEVEL]"
+        (selectionChanged)="onSelectChange($event, ROOTLEVEL) ">
+    </dropdown-with-filter>
+    <dropdown-with-filter label="Famiglia:"
+        [reference]="node.data.article[SECONDLEVEL]" 
+        [values]="categories[SECONDLEVEL]"
+        (selectionChanged)="onSelectChange($event, SECONDLEVEL) ">
+    </dropdown-with-filter>
+    <dropdown-with-filter label="Gruppo merceologico:"
+            [reference]="node.data.article[THIRDLEVEL]" 
+            [values]="categories[THIRDLEVEL]"
+            (selectionChanged)="onSelectChange($event, THIRDLEVEL) ">
+    </dropdown-with-filter>
+    <button (click)="confirmChanges($event)">Conferma</button>
+</span>
