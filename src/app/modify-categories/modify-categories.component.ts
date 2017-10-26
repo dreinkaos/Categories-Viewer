@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import { AppConfigurations } from '../app-config';
 
 @Component({
@@ -8,15 +8,18 @@ import { AppConfigurations } from '../app-config';
 })
 export class ModifyCategoriesComponent implements OnInit {
 
+  
   @Input() categories: any;
   @Output() saveCategories = new EventEmitter<boolean>();
   obj: Object = Object;
   selectedRow: any;
+  selectedCategory: string;
   columnsTranslations: any[] = AppConfigurations.COLUMNS;
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {    
+    this.selectedCategory = AppConfigurations.ROOTLEVEL;
   }
 
   save(){

@@ -45,12 +45,11 @@ export class CategoriesTreeComponent implements OnInit {
   }
 
   private getColumnLabelByKey(key: string): string {
-    var columns = this.COLUMNS.filter(x => x.key == key);
-    console.log(key, columns);
+    var columns = this.COLUMNS.filter(x => x.key == key);    
     return columns[0].value;
   }
 
-  generateTree(){        
+  private generateTree(){        
     this.nodes = [];
     var counter = 1;
     var titleRoot = {id: counter, name: this.getColumnLabelByKey(this.ROOTLEVEL), children: [], type: "title"};

@@ -5,10 +5,9 @@
             <div class="demo-tab-content">                
                 <modify-categories [categories]="categories" (saveCategories)="saveCategories($event)"></modify-categories>
             </div>
-        </mat-tab>
-        
+        </mat-tab>        
         <mat-tab label="Nuove categorie">            
-            <button type="button" (click)="saveArticles()">Save</button>
+            <button mat-raised-button type="button" (click)="saveArticles()">Salva</button>
             <div class="demo-tab-content">
                 <categories-tree [data]="newItemsDictionary" [categories]="categories" (updateItemsCategoryInParent)="onSelectedCategoryChange($event)"></categories-tree>
             </div>
@@ -18,8 +17,7 @@
             <div class="demo-tab-content">
                 <categories-tree [data]="originalItemsDictionary" [categories]="categories" (updateItemsCategoryInParent)="onSelectedCategoryChange($event)" [readOnly]="true"></categories-tree>
             </div>  
-        </mat-tab>
-        
+        </mat-tab>        
         <mat-tab label="Export">
             <div class="demo-tab-content">
                 Export dell'albero delle categorie.
