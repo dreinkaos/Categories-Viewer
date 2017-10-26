@@ -44,20 +44,26 @@ export class CategoriesTreeComponent implements OnInit {
     }    
   }
 
+  private getColumnLabelByKey(key: string): string {
+    var columns = this.COLUMNS.filter(x => x.key == key);
+    console.log(key, columns);
+    return columns[0].value;
+  }
+
   generateTree(){        
     this.nodes = [];
     var counter = 1;
-    var titleRoot = {id: counter, name: this.COLUMNS[this.ROOTLEVEL].label, children: [], type: "title"};
+    var titleRoot = {id: counter, name: this.getColumnLabelByKey(this.ROOTLEVEL), children: [], type: "title"};
     for (var key in this.data){   
         counter += 1;
         var root = {id: counter, name: key, children: [], type: this.ROOTLEVEL};
         counter += 1;
-        root.children.push({id: counter, name: this.COLUMNS[this.SECONDLEVEL].label, children: [], type: "title"});
+        root.children.push({id: counter, name: this.getColumnLabelByKey(this.SECONDLEVEL), children: [], type: "title"});
         for (var secondKey in this.data[key]){
           counter += 1;
           var second = {id:counter, name: secondKey, children: [], type: this.SECONDLEVEL};
           counter += 1;
-          second.children.push({id: counter, name: this.COLUMNS[this.THIRDLEVEL].label, children: [], type: "title"});
+          second.children.push({id: counter, name: this.getColumnLabelByKey(this.THIRDLEVEL), children: [], type: "title"});
           for (var thirdKey in this.data[key][secondKey]){
             counter += 1;
             var third = {id:counter, name: thirdKey,  children: [], type: this.THIRDLEVEL};

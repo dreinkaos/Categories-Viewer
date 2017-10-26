@@ -1,6 +1,6 @@
 <mat-form-field>
   <mat-select [(ngModel)]="selectedCategory" placeholder="Scegli categoria">
-    <mat-option *ngFor="let categoryType of obj.keys(categories)" [value]="categoryType">{{ categoryType }}</mat-option>
+    <mat-option *ngFor="let categoryType of obj.keys(categories)" [value]="categoryType">{{ categoryType | valueByKey:columnsTranslations }}</mat-option>
   </mat-select>
 </mat-form-field>
 <mat-form-field floatPlaceholder="never">
