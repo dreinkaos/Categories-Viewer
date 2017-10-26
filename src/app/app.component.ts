@@ -11,8 +11,7 @@ import { AppConfigurations } from './app-config';
 export class AppComponent implements OnInit {
   ROOTLEVEL: string = AppConfigurations.ROOTLEVEL;
   SECONDLEVEL: string = AppConfigurations.SECONDLEVEL;
-  THIRDLEVEL: string = AppConfigurations.THIRDLEVEL;
-  COLUMNS = AppConfigurations.COLUMNS;
+  THIRDLEVEL: string = AppConfigurations.THIRDLEVEL;  
   
   categories = {};
   originalItems = [];

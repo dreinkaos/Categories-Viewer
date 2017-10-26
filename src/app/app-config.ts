@@ -2,16 +2,16 @@
     ROOTLEVEL: 'ARCATOMO', //categoria omogenea
     SECONDLEVEL: 'ARCODFAM', //famiglia
     THIRDLEVEL: 'ARGRUMER', //gruppo merceologico
-    COLUMNS : {
-        "ARCODART" : {"label": "Codice articolo"},
-        "ARDESART" : {"label": "Articolo"},
-        "ARGRUMER" : {"label": "Codice gruppo merceologico"},
-        "GMDESCRI" : {"label": "Gruppo merceologico"},
-        "ARCODFAM" : {"label": "Codice famiglia"},
-        "FADESCRI" : {"label": "Famiglia"},
-        "ARCATOMO" : {"label": "Codice categoria omogenea"},
-        "OMDESCRI" : {"label": "Categoria omogenea"}    
-      }
+    COLUMNS : [
+      {"key": "ARCODART", "value": "Codice articolo"},
+      {"key": "ARDESART", "value": "Articolo"},
+      {"key": "ARGRUMER", "value": "Codice gruppo merceologico"},
+      {"key": "GMDESCRI", "value": "Gruppo merceologico"},
+      {"key": "ARCODFAM", "value": "Codice famiglia"},
+      {"key": "FADESCRI", "value": "Famiglia"},
+      {"key": "ARCATOMO", "value": "Codice categoria omogenea"},
+      {"key": "OMDESCRI", "value": "Categoria omogenea"}    
+    ]
  }
 
 /*
