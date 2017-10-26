@@ -2,10 +2,11 @@
     <tree-root [(nodes)]="nodes" (activate)="setSelectedNode($event)">
         <ng-template #treeNodeTemplate let-node let-index="index">
             <span *ngIf="node.data.children && node.data.type != 'title'">   
-                <span>({{node.data.name}}) - {{ node.data.name  | valueByKey: categories[node.data.type] }}</span>
+                <span>{{ node.data.name  | valueByKey: categories[node.data.type] }}</span>
+                <span class="category-detail">Codice: {{ node.data.name }}, numero di articoli: {{ node.data.numberOfArticles }}</span>
             </span>          
             <span *ngIf="!node.data.children && node.data.type != 'title'">    
-                <span>{{ node.data.article.ARDESART }} (codice {{ node.data.article.ARCODART }})</span>              
+                <span>{{ node.data.article.ARDESART }}</span><span class="category-detail">Codice: {{ node.data.article.ARCODART }}</span>              
             </span>
             <span class="title" *ngIf="node.data.type == 'title'">
                 {{ node.data.name  }}
@@ -13,7 +14,7 @@
         </ng-template>
     </tree-root> 
     <span class="box" *ngIf="!readOnly">
-        <article [node]="selectedNode" [categories]="categories" (updateArticle)= "onSelectedArticleChange($event)"></article>  
-        <category [node]="selectedNode" [categories]="categories" (updateItemsCategory)= "updateItemsCategory($event)"></category>       
+        <article [node]="selectedNode" [categories]="categories" (updateArticle)="onSelectedArticleChange($event)"></article>  
+        <category [node]="selectedNode" [categories]="categories" (updateItemsCategory)="updateItemsCategory($event)"></category>       
     </span>
 </span>
