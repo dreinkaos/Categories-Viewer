@@ -1,6 +1,7 @@
 @import '~angular-tree-component/dist/angular-tree-component.css';
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
 
+
 $themeColor: #4571a7;
 $acceptColor: #66bb66;
 $rejectColor: #d8515c;
@@ -30,11 +31,24 @@ $rejectColor: #d8515c;
     padding: 16px;
 }
 
-.mat-button, .mat-icon-button, .mat-raised-button{
+.mat-button, .mat-raised-button{
     background-color: $themeColor;    
 }
+
+
+.material-icons{
+    font-weight: bold;
+}
+
+.material-icons #done {
+    color: $acceptColor;    
+}
+
+.material-icons #clear {
+    color: $rejectColor;    
+}
+
 .mat-button-wrapper {
-    
     font-weight: bold
 }
 

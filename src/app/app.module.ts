@@ -12,7 +12,7 @@ import { DropdownWithFilterComponent } from './dropdown-with-filter/dropdown-wit
 import { FilterOptionsByValuePipe } from './filter-options-by-value.pipe';
 import { CategoryComponent } from './category/category.component';
 import { CategoriesTreeComponent } from './categories-tree/categories-tree.component';
-import { MatTabsModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatSlideToggleModule, MatRadioModule, MatButtonModule } from '@angular/material';
+import { MatTabsModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatSlideToggleModule, MatRadioModule, MatButtonModule, MatIconModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -44,7 +44,8 @@ import { FilterOptionsByStatePipe } from './filter-options-by-state.pipe';
     MatSelectModule,
     MatSlideToggleModule,
     MatRadioModule,
-    MatButtonModule
+    MatButtonModule,
+    MatIconModule
   ],
   providers: [SqlServerService, SqliteService],
   bootstrap: [AppComponent]

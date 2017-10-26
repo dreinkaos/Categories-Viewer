@@ -22,9 +22,21 @@
 <table>
   <th>Chiave</th><th>Valore</th><th>Tags</th><th>Attivo</th>
   <tr *ngFor="let category of categories[selectedCategory] | filterOptionsByValue | filterOptionsByState:isActive"
-   (click)="setHighlighted(category.key, $event)" [class.highlighted]="category.key == selectedRow">
-    <td>{{ category.key }}</td>
-    <td>{{ category.value }}</td>
+    [class.highlighted]="(selectedRow) && category.key == selectedRow.key">
+    <td (click)="onItemClick(category, $event)">{{ category.key }}</td>
+    <td *ngIf="(selectedRow) && category.key == selectedRow.key">
+        <mat-form-field>
+            <input matInput [(ngModel)]="category.value" #filter placeholder="Modifica" />            
+        </mat-form-field>
+        <button (click)="onItemClick(category, $event)" mat-icon-button>
+            <mat-icon><i class="material-icons" id="done">done</i></mat-icon>
+        </button>
+        <button (click)="restoreAndClick(category, $event)" mat-icon-button>
+            <mat-icon><i class="material-icons" id="clear">clear</i></mat-icon>
+        </button>
+    </td>
+      
+    <td (click)="onItemClick(category, $event)" *ngIf="(!selectedRow) || (selectedRow && category.key != selectedRow.key)">{{ category.value }}</td>
     <td>Empty tags</td>
     <td>
       <mat-slide-toggle
