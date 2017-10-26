@@ -14,7 +14,7 @@ export class AppComponent implements OnInit {
   THIRDLEVEL: string = AppConfigurations.THIRDLEVEL;
   COLUMNS = AppConfigurations.COLUMNS;
   
-  categories = {ROOTLEVEL:[], SECONDLEVEL:[], THIRDLEVEL:[]};
+  categories = {};
   originalItems = [];
   newItems = [];
   originalItemsDictionary = {};
@@ -42,7 +42,6 @@ export class AppComponent implements OnInit {
     var newRootLevelValue = node.data[this.ROOTLEVEL];
     var newSecondLevelValue = node.data[this.SECONDLEVEL];
     var newThirdLevelValue = node.data[this.THIRDLEVEL];
-    console.log("node for filter", node);
     if (nodeType == this.ROOTLEVEL){
         //no need to look for ancestors
         rootFilter = node.data.name;
@@ -66,7 +65,6 @@ export class AppComponent implements OnInit {
     var value = node.data.name;
     
     var filters = this.getCategoriesFilter(node);
-    console.log(filters);
     for (var index in this.newItems)
     {
       if (filters.rootFilter != undefined && filters.rootFilter != this.newItems[index][this.ROOTLEVEL])
@@ -86,23 +84,78 @@ export class AppComponent implements OnInit {
     this.newItemsDictionary = this.dictionaryFromData(this.newItems);  
   }
 
-  saveCategories(){
-    this.sqliteService.setBasicResource("articles", this.newItems);      
-  }
-  
-  private getData(): void {
+  initializeDataToAdHocSituation(){
     Promise.all([
-      this.sqliteService.getBasicResource("articles").then(data => this.newItems = data),
-      this.sqlService.getItems().then(data => this.originalItems = data),
       this.sqlService.getHomogeneousCategories().then(data => this.categories[this.ROOTLEVEL] = data),
       this.sqlService.getFamilyCategories().then(data => this.categories[this.SECONDLEVEL] = data),      
-      this.sqlService.getMerceologicalCategories().then(data => this.categories[this.THIRDLEVEL] = data)
+      this.sqlService.getMerceologicalCategories().then(data => this.categories[this.THIRDLEVEL] = data),
+      this.sqliteService.setBasicResource("articles", this.newItems), 
+      this.sqliteService.setBasicResource("homogeneousCategories", this.categories[this.ROOTLEVEL]),
+      this.sqliteService.setBasicResource("familyCategories", this.categories[this.SECONDLEVEL]) ,
+      this.sqliteService.setBasicResource("merceologicalCategories", this.categories[this.THIRDLEVEL]) 
+    ]).then(()=> this.setActiveCategories);    
+  }
+
+  private setActiveCategories(){
+      for (var index in this.newItems){
+        for (var ii in this.categories[this.ROOTLEVEL]){
+          if (this.categories[this.ROOTLEVEL][ii].key == this.newItems[index][this.ROOTLEVEL]){
+            this.categories[this.ROOTLEVEL][ii].active = true;            
+          }
+        }
+
+        for (var ii in this.categories[this.SECONDLEVEL]){
+          if (this.categories[this.SECONDLEVEL][ii].key == this.newItems[index][this.SECONDLEVEL]){
+            this.categories[this.SECONDLEVEL][ii].active = true;
+          }
+        }
+
+        for (var ii in this.categories[this.THIRDLEVEL]){
+          if (this.categories[this.THIRDLEVEL][ii].key == this.newItems[index][this.THIRDLEVEL]){
+            this.categories[this.THIRDLEVEL][ii].active = true;
+          }
+        }        
+      }
+  }
+
+  saveArticles(){
+    this.sqliteService.setBasicResource("articles", this.newItems); 
+  }
+
+  saveCategories(categories){
+    
+    for (var category in categories){
+      var serviceName;
+      if (category == 'ARGRUMER'){
+        serviceName = "merceologicalCategories";        
+      }
+      else if (category == 'ARCATOMO'){
+        serviceName = "homogeneousCategories";
+      }
+      else if (category == 'ARCODFAM'){
+        serviceName = "familyCategories";
+      }
+      this.categories[category] = categories[category];
+      this.sqliteService.setBasicResource(serviceName, this.categories[category]); 
+    }    
+  }
+  
+  //TODO: refactory needed. Resource names shouldn't be hardcoded but configured.
+  //      Best solution could be to have a config dictionary for each category including service names, column names and so on.
+  //      Check this hint even for saveCategories method
+  private getData(): void {
+    Promise.all([
+      this.sqlService.getItems().then(data => this.originalItems = data),
+      this.sqliteService.getBasicResource("articles").then(data => this.newItems = data),
+      this.sqliteService.getBasicResource("homogeneousCategories").then(data => this.categories[this.ROOTLEVEL] = data),
+      this.sqliteService.getBasicResource("familyCategories").then(data => this.categories[this.SECONDLEVEL] = data),      
+      this.sqliteService.getBasicResource("merceologicalCategories").then(data => this.categories[this.THIRDLEVEL] = data)      
     ]).then(()=>{
       this.originalItemsDictionary = this.dictionaryFromData(this.originalItems);
       if (this.isEmptyObject(this.newItems)){
          this.newItems = JSON.parse(JSON.stringify(this.originalItems));         
       }
-      this.newItemsDictionary = this.dictionaryFromData(this.newItems);
+      this.newItemsDictionary = this.dictionaryFromData(this.newItems);      
     });
   }
 

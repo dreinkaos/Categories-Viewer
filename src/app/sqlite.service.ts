@@ -17,7 +17,8 @@ export class SqliteService {
 
   setBasicResource(resourceName: string, resource: any): Promise<boolean>{
     var fullResourceServiceName: string = this.getResourceWebServiceName(resourceName, 'set');
-    const body = {value: resource};    
+    const body = {value: resource}; 
+    console.log(body, fullResourceServiceName)   
     return this.http.post(fullResourceServiceName, body)
     .toPromise()
     .then(response => response.json())
@@ -34,6 +35,6 @@ export class SqliteService {
   }
 
   private capitalizeFirst(name: string): string{
-    return name.charAt(0).toUpperCase() + name.substr(1).toLowerCase();
+    return name.charAt(0).toUpperCase() + name.substr(1);
   }
 }

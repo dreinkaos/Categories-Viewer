@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'modify-categories',
@@ -7,9 +7,31 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ModifyCategoriesComponent implements OnInit {
 
+  @Input() categories: any;
+  @Output() saveCategories = new EventEmitter<boolean>();
+  obj: Object = Object;
+  selectedRow;
   constructor() { }
 
-  ngOnInit() {
+  ngOnInit() {    
   }
+
+  save(){
+    this.saveCategories.emit(this.categories);
+  }
+  
+  setHighlighted(item, event){  
+    this.selectedRow = item;     
+  }
+
+  /*setHighlighted(item, event){
+    var itemIndex = this.highlightedRows.indexOf(item);
+    if (itemIndex == -1){
+      this.highlightedRows.push(item);
+    }
+    else{
+      this.highlightedRows.splice(itemIndex, 1);
+    }    
+  }*/
 
 }

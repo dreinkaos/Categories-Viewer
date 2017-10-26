@@ -1,3 +1,37 @@
-<p>
-  modify-categories works!
-</p>
+<mat-form-field>
+  <mat-select [(ngModel)]="selectedCategory" placeholder="Scegli categoria">
+    <mat-option *ngFor="let categoryType of obj.keys(categories)" [value]="categoryType">{{ categoryType }}</mat-option>
+  </mat-select>
+</mat-form-field>
+<mat-form-field floatPlaceholder="never">
+    <input matInput #filter placeholder="Filtra categoria per valore">    
+</mat-form-field>  
+
+<mat-radio-group [(ngModel)]="isActive">
+  <mat-radio-button [value]="true">
+    Attivo
+  </mat-radio-button>
+  <mat-radio-button [value]="false">
+    Non attivo
+  </mat-radio-button>
+  <mat-radio-button [value]="undefined">
+    Tutto
+  </mat-radio-button>
+</mat-radio-group>
+
+<button (click)="save()">Salva</button>
+<table>
+  <th>Chiave</th><th>Valore</th><th>Tags</th><th>Attivo</th>
+  <tr *ngFor="let category of categories[selectedCategory] | filterOptionsByValue | filterOptionsByState:isActive"
+   (click)="setHighlighted(category.key, $event)" [class.highlighted]="category.key == selectedRow">
+    <td>{{ category.key }}</td>
+    <td>{{ category.value }}</td>
+    <td>Empty tags</td>
+    <td>
+      <mat-slide-toggle
+        [checked]="category.active"
+        [disabled]="false">      
+      </mat-slide-toggle>        
+    </td>
+  </tr>
+</table>

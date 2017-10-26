@@ -1,8 +1,14 @@
 <div style="margin: 1em;">
     <h1>Aggiornamento categorie</h1>
     <mat-tab-group>
+        <mat-tab label="Modifica categorie">
+            <div class="demo-tab-content">                
+                <modify-categories [categories]="categories" (saveCategories)="saveCategories($event)"></modify-categories>
+            </div>
+        </mat-tab>
+        
         <mat-tab label="Nuove categorie">            
-            <button type="button" (click)="saveCategories()">Save</button>
+            <button type="button" (click)="saveArticles()">Save</button>
             <div class="demo-tab-content">
                 <categories-tree [data]="newItemsDictionary" [categories]="categories" (updateItemsCategoryInParent)="onSelectedCategoryChange($event)"></categories-tree>
             </div>
@@ -13,11 +19,7 @@
                 <categories-tree [data]="originalItemsDictionary" [categories]="categories" (updateItemsCategoryInParent)="onSelectedCategoryChange($event)" [readOnly]="true"></categories-tree>
             </div>  
         </mat-tab>
-        <mat-tab label="Modifica categorie">
-            <div class="demo-tab-content">
-                <modify-categories></modify-categories>
-            </div>
-        </mat-tab>
+        
         <mat-tab label="Export">
             <div class="demo-tab-content">
                 Export dell'albero delle categorie.

@@ -1,8 +1,5 @@
 @import '~angular-tree-component/dist/angular-tree-component.css';
-@import 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap-flex.min.css';
-@import 'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css';
 @import 'https://unpkg.com/@angular/material/prebuilt-themes/indigo-pink.css';
-@import 'https://fonts.googleapis.com/icon?family=Material+Icons';
 
 .tree-node-active {
     font-weight: bold;
@@ -28,4 +25,21 @@
 .demo-tab-content {
     padding: 16px;
 }
+
+.mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-bar
+{
+    background-color: rgb(102, 187, 102);
+}
+.mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-thumb
+{
+    background-color: rgb(102, 187, 102);
+}
   
+.mat-slide-toggle:not(.mat-checked):not(.mat-disabled) .mat-slide-toggle-bar
+{
+    background-color: rgb(216, 81, 92);
+}
+.mat-slide-toggle:not(.mat-checked):not(.mat-disabled) .mat-slide-toggle-thumb
+{
+    background-color: rgb(216, 81, 92);
+}
