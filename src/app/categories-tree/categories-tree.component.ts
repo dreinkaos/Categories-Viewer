@@ -1,5 +1,6 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { AppConfigurations } from '../app-config';
+import { TreeComponent, TreeModel, TreeNode } from 'angular-tree-component';
 import { Subject } from 'rxjs/Subject';
 
 @Component({
@@ -11,21 +12,36 @@ export class CategoriesTreeComponent implements OnInit {
   
   selectedNode: any;
   nodes: any[];
-  
+  filter: string;
+  options = {
+    useVirtualScroll: true
+    
+  };
   ROOTLEVEL: string = AppConfigurations.ROOTLEVEL;
   SECONDLEVEL: string = AppConfigurations.SECONDLEVEL;
   THIRDLEVEL: string = AppConfigurations.THIRDLEVEL;
   COLUMNS = AppConfigurations.COLUMNS;
-
+  @ViewChild('tree') treeComponent: TreeComponent;
   @Input() data;
   @Input() categories;
   @Input() readOnly?: boolean;
   @Input() parentSubject:Subject<any>;
   @Output() updateItemsCategoryInParent = new EventEmitter<boolean>();
-  
+  @Output() saveArticlesInParent = new EventEmitter<boolean>();
+
   constructor() { }
 
   ngOnInit() {}
+
+
+  filterNodes(filter: string){
+    if (filter.length > 2){
+      this.treeComponent.treeModel.filterNodes(filter, true);    
+    }
+    else{
+      this.treeComponent.treeModel.filterNodes("", true);    
+    }
+  }
 
   ngOnChanges(){
     if (this.parentSubject){
@@ -36,6 +52,10 @@ export class CategoriesTreeComponent implements OnInit {
       });
     }
     this.generateTree();    
+  }
+
+  saveArticles(){
+    this.saveArticlesInParent.emit(true);
   }
 
   updateItemsCategory(node){

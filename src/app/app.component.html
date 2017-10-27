@@ -5,16 +5,25 @@
         <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
       </div>
     <mat-tab-group (selectedIndexChange)="pageChanged()" *ngIf="!loading">
-        <mat-tab label="Nuove categorie">            
-            <button mat-raised-button type="button" (click)="saveArticles()">Salva</button>
+        <mat-tab label="Nuove categorie">
             <div class="demo-tab-content">
-                <categories-tree [parentSubject]="parentSubject" [data]="newItemsDictionary" [(categories)]="categories" (updateItemsCategoryInParent)="onSelectedCategoryChange($event)"></categories-tree>
+                <categories-tree 
+                [parentSubject]="parentSubject" 
+                [data]="newItemsDictionary" 
+                [(categories)]="categories" 
+                (updateItemsCategoryInParent)="onSelectedCategoryChange($event)"
+                (saveArticlesInParent)="saveArticles($event)">
+            </categories-tree>
             </div>
         </mat-tab>
         <mat-tab label="Categorie AD HOC">
-            <h3>Categorie in sola visualizzazione</h3>
+            <!--h3>Categorie in sola visualizzazione</h3-->
             <div class="demo-tab-content">
-                <categories-tree [data]="originalItemsDictionary" [categories]="categories" (updateItemsCategoryInParent)="onSelectedCategoryChange($event)" [readOnly]="true"></categories-tree>
+                <categories-tree 
+                [data]="originalItemsDictionary" 
+                [categories]="categories" 
+                (updateItemsCategoryInParent)="onSelectedCategoryChange($event)" 
+                [readOnly]="true"></categories-tree>
             </div>  
         </mat-tab>        
         <mat-tab label="Categorie disponibili">
