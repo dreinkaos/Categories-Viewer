@@ -15,5 +15,5 @@
             [values]="categories[THIRDLEVEL]"
             (selectionChanged)="onSelectChange($event, THIRDLEVEL) ">
     </dropdown-with-filter>
-    <button mat-raised-button (click)="confirmChanges($event)">Applica modifica</button>
+    <button *ngIf="node.data.article[ROOTLEVEL] && node.data.article[SECONDLEVEL] && node.data.article[THIRDLEVEL]" mat-raised-button (click)="confirmChanges($event)">Applica modifica</button>
 </span>
