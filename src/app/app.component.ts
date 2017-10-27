@@ -3,6 +3,7 @@ import { SqlServerService } from './sql-server.service';
 import { SqliteService } from './sqlite.service';
 import { AppConfigurations } from './app-config';
 import { Subject } from 'rxjs/Subject';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-root',
@@ -24,7 +25,13 @@ export class AppComponent implements OnInit {
 
   parentSubject:Subject<any> = new Subject();
   
-  constructor(private sqlService: SqlServerService, private sqliteService: SqliteService){}
+  constructor(private sqlService: SqlServerService, private sqliteService: SqliteService, public messageBox: MatSnackBar){}
+
+  showMessage(message: string, action: string) {
+    this.messageBox.open(message, action, {
+      duration: 3000,
+    });
+  }
 
   pageChanged() {
     this.parentSubject.next('Page changed');
@@ -125,7 +132,7 @@ export class AppComponent implements OnInit {
   }
 
   saveArticles(){
-    this.sqliteService.setBasicResource("articles", this.newItems); 
+    this.sqliteService.setBasicResource("articles", this.newItems).then(()=>this.showMessage("Dati salvati con successo!", null)); 
   }
 
   saveCategories(categories){
@@ -141,7 +148,10 @@ export class AppComponent implements OnInit {
       else if (category == 'ARCODFAM'){
         serviceName = "familyCategories";
       }
-      this.sqliteService.setBasicResource(serviceName, this.categories[category]).then(()=>this.categories[category] = categories[category]); 
+      this.sqliteService.setBasicResource(serviceName, this.categories[category]).then(()=>{
+        this.categories[category] = categories[category];
+        this.showMessage("Dati salvati con successo!", null);
+      }); 
     }    
   }
   
