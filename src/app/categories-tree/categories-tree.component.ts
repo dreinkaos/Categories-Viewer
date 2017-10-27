@@ -112,6 +112,6 @@ export class CategoriesTreeComponent implements OnInit {
         }        
         this.nodes.push(root);
     }
-    this.nodes.unshift(titleRoot);y        
+    this.nodes.unshift(titleRoot);      
   }
 }
