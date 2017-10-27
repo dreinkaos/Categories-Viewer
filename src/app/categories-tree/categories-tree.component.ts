@@ -13,10 +13,7 @@ export class CategoriesTreeComponent implements OnInit {
   selectedNode: any;
   nodes: any[];
   filter: string;
-  options = {
-    useVirtualScroll: true
-    
-  };
+  //options = {useVirtualScroll: true};
   ROOTLEVEL: string = AppConfigurations.ROOTLEVEL;
   SECONDLEVEL: string = AppConfigurations.SECONDLEVEL;
   THIRDLEVEL: string = AppConfigurations.THIRDLEVEL;
@@ -53,6 +50,7 @@ export class CategoriesTreeComponent implements OnInit {
       });
     }
     this.generateTree();    
+    
   }
 
   saveArticles(){
@@ -66,7 +64,6 @@ export class CategoriesTreeComponent implements OnInit {
 
   updateArticleCategory(node){
     this.updateArticleCategoryInParent.emit(node);    
-    console.log(node);
   }
 
   setSelectedNode(event){
@@ -115,6 +112,6 @@ export class CategoriesTreeComponent implements OnInit {
         }        
         this.nodes.push(root);
     }
-    this.nodes.unshift(titleRoot);    
+    this.nodes.unshift(titleRoot);y        
   }
 }
