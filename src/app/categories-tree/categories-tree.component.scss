@@ -2,17 +2,14 @@
     font-size: 0.8em;
     font-style: italic;
 }
-.footer{  
-    background-color: rgb(156, 152, 170);
-    margin: 5px;  
+
+.rightSide{
     position: fixed;
-    bottom: 0;
-    width: 80%;    
+    padding: 3em;
+    left: 60%;    
+    transform: translateX(-40%);
 }
 
-.test{
-    position: fixed;
-    padding: 2em;
-    left: 50%;    
-    transform: translateX(-50%);
+.leftSide {
+    display: flex;
 }

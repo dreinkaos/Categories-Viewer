@@ -1,4 +1,3 @@
- 
 <span *ngIf="node && node.data.children && node.isActive">
         Modifica categoria per tutti gli articoli
         <dropdown-with-filter label="Categoria omogenea"
@@ -18,5 +17,5 @@
         (selectionChanged)="onSelectChange($event, THIRDLEVEL)"
         *ngIf="node.data.type == THIRDLEVEL">
         </dropdown-with-filter>       
-    <button mat-raised-button (click)="confirmChanges($event)">Conferma modifica</button>
+    <button mat-raised-button (click)="confirmChanges($event)">Applica modifica</button>
 </span>

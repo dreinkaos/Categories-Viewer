@@ -1,4 +1,4 @@
-<div style="display: flex;">
+<div class="leftSide">
     <span>
         <tree-root [(nodes)]="nodes" (activate)="setSelectedNode($event)">
             <ng-template #treeNodeTemplate let-node let-index="index">
@@ -15,7 +15,7 @@
             </ng-template>
         </tree-root>         
     </span>
-    <span *ngIf="!readOnly" class="test">
+    <span *ngIf="!readOnly" class="rightSide">
         <article [node]="selectedNode" [categories]="categories" (updateArticle)="onSelectedArticleChange($event)"></article>  
         <category [node]="selectedNode" [categories]="categories" (updateItemsCategory)="updateItemsCategory($event)"></category>       
     </span>
