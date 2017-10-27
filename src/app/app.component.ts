@@ -40,10 +40,12 @@ export class AppComponent implements OnInit {
   onSelectedArticleChange(value){
     for (var index in this.newItems){
       if (this.newItems[index].ARCODART === value.ARCODART){
+        console.log(value, this.newItems[index])
         this.newItems[index] = value;
         break;
       }
-    }        
+    }       
+    this.newItemsDictionary = this.dictionaryFromData(this.newItems); 
   }
 
   private getCategoriesFilter(node){

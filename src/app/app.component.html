@@ -12,6 +12,7 @@
                 [data]="newItemsDictionary" 
                 [(categories)]="categories" 
                 (updateItemsCategoryInParent)="onSelectedCategoryChange($event)"
+                (updateArticleCategoryInParent)="onSelectedArticleChange($event)"
                 (saveArticlesInParent)="saveArticles($event)">
             </categories-tree>
             </div>
@@ -21,8 +22,7 @@
             <div class="demo-tab-content">
                 <categories-tree 
                 [data]="originalItemsDictionary" 
-                [categories]="categories" 
-                (updateItemsCategoryInParent)="onSelectedCategoryChange($event)" 
+                [categories]="categories"                 
                 [readOnly]="true"></categories-tree>
             </div>  
         </mat-tab>        

@@ -20,7 +20,7 @@
         </tree-root>         
     </span>
     <span *ngIf="!readOnly" class="rightSide">
-        <article [node]="selectedNode" [categories]="categories" (updateArticle)="onSelectedArticleChange($event)"></article>  
+        <article [node]="selectedNode" [categories]="categories" (updateArticle)="updateArticleCategory($event)"></article>  
         <category [node]="selectedNode" [categories]="categories" (updateItemsCategory)="updateItemsCategory($event)"></category>       
     </span>
 </div>

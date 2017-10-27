@@ -5,7 +5,7 @@ import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class SqlServerService {
 
-  private address: string = "http://localhost:3000";
+  private address: string = "http://192.168.1.184:3000";
   constructor(private http: Http) { }
 
   getItems(): Promise<any[]> {

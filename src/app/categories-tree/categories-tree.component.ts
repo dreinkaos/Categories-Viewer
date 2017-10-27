@@ -27,6 +27,7 @@ export class CategoriesTreeComponent implements OnInit {
   @Input() readOnly?: boolean;
   @Input() parentSubject:Subject<any>;
   @Output() updateItemsCategoryInParent = new EventEmitter<boolean>();
+  @Output() updateArticleCategoryInParent = new EventEmitter<boolean>();  
   @Output() saveArticlesInParent = new EventEmitter<boolean>();
 
   constructor() { }
@@ -61,6 +62,11 @@ export class CategoriesTreeComponent implements OnInit {
   updateItemsCategory(node){
     this.updateItemsCategoryInParent.emit(node);       
     node.setIsActive(false);    
+  }
+
+  updateArticleCategory(node){
+    this.updateArticleCategoryInParent.emit(node);    
+    console.log(node);
   }
 
   setSelectedNode(event){
