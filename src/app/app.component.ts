@@ -13,7 +13,7 @@ export class AppComponent implements OnInit {
   ROOTLEVEL: string = AppConfigurations.ROOTLEVEL;
   SECONDLEVEL: string = AppConfigurations.SECONDLEVEL;
   THIRDLEVEL: string = AppConfigurations.THIRDLEVEL;  
-  
+  loading: boolean = true;
   categories = {};
   originalItems = [];
   newItems = [];
@@ -161,6 +161,7 @@ export class AppComponent implements OnInit {
          this.newItems = JSON.parse(JSON.stringify(this.originalItems));         
       }
       this.newItemsDictionary = this.dictionaryFromData(this.newItems);
+      this.loading = false;
       //this.setActiveCategories();      
     });
   }

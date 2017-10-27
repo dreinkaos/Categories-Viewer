@@ -1,6 +1,10 @@
 <div>
     <h1>Aggiornamento categorie</h1>
-    <mat-tab-group (selectedIndexChange)="pageChanged()">
+    
+    <div class="loading-indicator" *ngIf="loading">
+        <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+      </div>
+    <mat-tab-group (selectedIndexChange)="pageChanged()" *ngIf="!loading">
         <mat-tab label="Nuove categorie">            
             <button mat-raised-button type="button" (click)="saveArticles()">Salva</button>
             <div class="demo-tab-content">
