@@ -30,7 +30,9 @@ export class CategoriesTreeComponent implements OnInit {
   ngOnChanges(){
     if (this.parentSubject){
         this.parentSubject.subscribe(event => {
-        this.selectedNode.setIsActive(false);        
+        if (this.selectedNode){
+          this.selectedNode.setIsActive(false);        
+        }
       });
     }
     this.generateTree();    

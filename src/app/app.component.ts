@@ -141,7 +141,6 @@ export class AppComponent implements OnInit {
       else if (category == 'ARCODFAM'){
         serviceName = "familyCategories";
       }
-      //Object.assign(this.categories[category], categories[category]);
       this.sqliteService.setBasicResource(serviceName, this.categories[category]).then(()=>this.categories[category] = categories[category]); 
     }    
   }
