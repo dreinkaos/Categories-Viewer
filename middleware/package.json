@@ -3,12 +3,13 @@
   "version": "0.0.0",
   "description": "SQLServer and sqlite middleware for angular apps",
   "main": "server.js",
-    "dependencies": {
-        "express": "^4.14.0",
-        "body-parser": "^1.15.2",
-         "mssql":"^ 3.3.0"         
-    },
-    "scripts": {
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "mssql": "^ 3.3.0",
+    "sqlite3": "^3.1.13"
+  },
+  "scripts": {
     "start": "node server.js"
   },
   "author": {
