@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Headers, Http } from '@angular/http';
+import { Headers, Http, URLSearchParams} from '@angular/http';
 import { AppConfigurations } from './app-config';
 import 'rxjs/add/operator/toPromise';
 
@@ -8,17 +8,21 @@ export class SqliteService {
   private address: string = AppConfigurations.SERVER_ADDRESS;
   constructor(private http: Http) { }
 
-  getBasicResource(resourceName: string): Promise<any[]> {
-    var fullResourceServiceName: string = this.getResourceWebServiceName(resourceName, 'get');
-    return this.http.get(fullResourceServiceName)
+  getResource(resourceName: string): Promise<any[]> {
+    var fullResourceServiceName: string = this.getResourceWebServiceName('get');
+    var params: URLSearchParams = new URLSearchParams();
+    params.set("resourceName", resourceName);
+    return this.http.get(fullResourceServiceName, {
+      search: params
+    })
     .toPromise()
     .then(response => response.json())
     .catch(this.handleError);
   }  
 
-  setBasicResource(resourceName: string, resource: any): Promise<boolean>{
-    var fullResourceServiceName: string = this.getResourceWebServiceName(resourceName, 'set');
-    const body = {value: resource}; 
+  setResource(resourceName: string, resource: any): Promise<boolean>{
+    var fullResourceServiceName: string = this.getResourceWebServiceName('set');
+    const body = {value: resource, resourceName:resourceName}; 
     return this.http.post(fullResourceServiceName, body)
     .toPromise()
     .then(response => response.json())
@@ -30,8 +34,8 @@ export class SqliteService {
     return Promise.reject(error.message || error);
   }
 
-  private getResourceWebServiceName(resourceName: string, requestType: string): string{
-    return this.address + '/' + requestType + "New" + this.capitalizeFirst(resourceName);
+  private getResourceWebServiceName(requestType: string): string{
+    return this.address + '/api/' + requestType + 'Resource';
   }
 
   private capitalizeFirst(name: string): string{

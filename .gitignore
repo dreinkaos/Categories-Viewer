@@ -40,3 +40,5 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+middleware/sql/*.sql
+middleware/magris.sqlite

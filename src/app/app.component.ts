@@ -104,10 +104,10 @@ export class AppComponent implements OnInit {
       this.sqlService.getHomogeneousCategories().then(data => this.categories[this.ROOTLEVEL] = data),
       this.sqlService.getFamilyCategories().then(data => this.categories[this.SECONDLEVEL] = data),      
       this.sqlService.getMerceologicalCategories().then(data => this.categories[this.THIRDLEVEL] = data),
-      this.sqliteService.setBasicResource("articles", this.newItems), 
-      this.sqliteService.setBasicResource("homogeneousCategories", this.categories[this.ROOTLEVEL]),
-      this.sqliteService.setBasicResource("familyCategories", this.categories[this.SECONDLEVEL]) ,
-      this.sqliteService.setBasicResource("merceologicalCategories", this.categories[this.THIRDLEVEL]) 
+      this.sqliteService.setResource("articles", this.newItems), 
+      this.sqliteService.setResource("homogeneousCategories", this.categories[this.ROOTLEVEL]),
+      this.sqliteService.setResource("familyCategories", this.categories[this.SECONDLEVEL]) ,
+      this.sqliteService.setResource("merceologicalCategories", this.categories[this.THIRDLEVEL]) 
     ]).then(()=> this.setActiveCategories);    
   }
 
@@ -134,7 +134,7 @@ export class AppComponent implements OnInit {
   }
 
   saveArticles(){
-    this.sqliteService.setBasicResource("articles", this.newItems).then(()=>this.showMessage("Dati salvati con successo!", null)); 
+    this.sqliteService.setResource("articles", this.newItems).then(()=>this.showMessage("Dati salvati con successo!", null)); 
   }
 
   saveCategories(categories){
@@ -150,7 +150,7 @@ export class AppComponent implements OnInit {
       else if (category == 'ARCODFAM'){
         serviceName = "familyCategories";
       }
-      this.sqliteService.setBasicResource(serviceName, this.categories[category]).then(()=>{
+      this.sqliteService.setResource(serviceName, this.categories[category]).then(()=>{
         this.categories[category] = categories[category];
         this.showMessage("Dati salvati con successo!", null);
       }); 
@@ -163,10 +163,10 @@ export class AppComponent implements OnInit {
   private getData(): void {
     Promise.all([
       this.sqlService.getItems().then(data => this.originalItems = data),
-      this.sqliteService.getBasicResource("articles").then(data => this.newItems = data),
-      this.sqliteService.getBasicResource("homogeneousCategories").then(data => this.categories[this.ROOTLEVEL] = data),
-      this.sqliteService.getBasicResource("familyCategories").then(data => this.categories[this.SECONDLEVEL] = data),      
-      this.sqliteService.getBasicResource("merceologicalCategories").then(data => this.categories[this.THIRDLEVEL] = data)      
+      this.sqliteService.getResource("articles").then(data => this.newItems = data),
+      this.sqliteService.getResource("homogeneousCategories").then(data => this.categories[this.ROOTLEVEL] = data),
+      this.sqliteService.getResource("familyCategories").then(data => this.categories[this.SECONDLEVEL] = data),      
+      this.sqliteService.getResource("merceologicalCategories").then(data => this.categories[this.THIRDLEVEL] = data)      
     ]).then(()=>{
       this.originalItemsDictionary = this.dictionaryFromData(this.originalItems);
       if (this.isEmptyObject(this.newItems)){

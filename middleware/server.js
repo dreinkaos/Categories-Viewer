@@ -42,8 +42,10 @@ function getFile(filename){
 }
 
 // Body Parser Middleware
-app.use(bodyParser.json({ limit: '50mb'})); 
+app.use(bodyParser.json({limit: '50mb'})); 
 app.use(bodyParser.urlencoded({extended: true})); // to support URL-encoded bodies 
+
+
 
 //CORS Middleware
 app.use(function (req, res, next) {
@@ -78,9 +80,9 @@ var executeQuery = function(res, sqlquery){
     }); 
 }
 
-//WS FOR EACH TABLE  
-app.get('/getNewArticles', (req, res) => {
-    var tableName = 'articles';
+app.get('/api/getResource', (req, res) => {
+    //var tableName = 'articles';
+    var tableName = req.param('resourceName');
     db.all('select "value", "updatetime" FROM "' + tableName + '" ORDER BY "updatetime" DESC',
     function (err, row){
         if (err){
@@ -97,125 +99,33 @@ app.get('/getNewArticles', (req, res) => {
     });
 });
     
-app.post('/setNewArticles', function(req, res){
-    var tableName = 'articles';
+app.post('/api/setResource', function(req, res){
+    //var tableName = 'articles';
     var requestValue = req.body.value;
+    var tableName = req.body.resourceName;
     var timestamp = new Date();
     var timestampstring = timestamp.toISOString();
-    db.run('INSERT INTO "' + tableName + '" ("value", "updatetime") VALUES (?,?)', [JSON.stringify(requestValue), timestampstring],
-    function (err, row){
+    db.run('DELETE FROM "' + tableName + '"', function(err, row) {
         if (err){
+            console.log("being in error");
             res.status(500);
-        }else {            
-            res.end('true');
+        }
+        else{
+            db.run('INSERT INTO "' + tableName + '" ("value", "updatetime") VALUES (?,?)', [JSON.stringify(requestValue), timestampstring],
+            function (err, row){
+                if (err){
+                    res.status(500);
+                }else {            
+                    res.end('true');
+                }
+            });
         }
     });
 });
-
-app.get('/getNewMerceologicalCategories', (req, res) => {
-    var tableName = 'merceologicalCategories';
-    db.all('select "value", "updatetime" FROM "' + tableName + '" ORDER BY "updatetime" DESC',
-    function (err, row){
-        if (err){
-            res.status(500);
-        } else {
-            if (row.length > 0){
-                var p = JSON.parse(row[0].value);
-                res.send(p);
-            }
-            else{
-                res.send({});
-            }
-        }
-    });
-});
-    
-app.post('/setNewMerceologicalCategories', function(req, res){
-    var tableName = 'merceologicalCategories';
-    var requestValue = req.body.value;
-    var timestamp = new Date();
-    var timestampstring = timestamp.toISOString();
-    db.run('INSERT INTO "' + tableName + '" ("value", "updatetime") VALUES (?,?)', [JSON.stringify(requestValue), timestampstring],
-    function (err, row){
-        if (err){
-            res.status(500);
-        }else {            
-            res.end('true');
-        }
-    });
-});
-
-app.get('/getNewHomogeneousCategories', (req, res) => {
-    var tableName = 'homogeneousCategories';
-    db.all('select "value", "updatetime" FROM "' + tableName + '" ORDER BY "updatetime" DESC',
-    function (err, row){
-        if (err){
-            res.status(500);
-        } else {
-            if (row.length > 0){
-                var p = JSON.parse(row[0].value);
-                res.send(p);
-            }
-            else{
-                res.send({});
-            }
-        }
-    });
-});
-    
-app.post('/setNewHomogeneousCategories', function(req, res){
-    var tableName = 'homogeneousCategories';
-    var requestValue = req.body.value;
-    var timestamp = new Date();
-    var timestampstring = timestamp.toISOString();
-    db.run('INSERT INTO "' + tableName + '" ("value", "updatetime") VALUES (?,?)', [JSON.stringify(requestValue), timestampstring],
-    function (err, row){
-        if (err){
-            res.status(500);
-        }else {            
-            res.end('true');
-        }
-    });
-});
-
-app.get('/getNewFamilyCategories', (req, res) => {
-    var tableName = 'familyCategories';
-    db.all('select "value", "updatetime" FROM "' + tableName + '" ORDER BY "updatetime" DESC',
-    function (err, row){
-        if (err){
-            res.status(500);
-        } else {
-            if (row.length > 0){
-                var p = JSON.parse(row[0].value);
-                res.send(p);
-            }
-            else{
-                res.send({});
-            }
-        }
-    });
-});
-    
-app.post('/setNewFamilyCategories', function(req, res){
-    var tableName = 'familyCategories';
-    var requestValue = req.body.value;
-    var timestamp = new Date();
-    var timestampstring = timestamp.toISOString();
-    db.run('INSERT INTO "' + tableName + '" ("value", "updatetime") VALUES (?,?)', [JSON.stringify(requestValue), timestampstring],
-    function (err, row){
-        if (err){
-            res.status(500);
-        }else {            
-            res.end('true');
-        }
-    });
-});
-    
-
 
 //GENERATES WS FOR EACH QUERY FOUND IN SQL FOLDER
 fs.readdirSync(sqlFolder).forEach(file => {
-    app.get("/" + file.split('.', 1), function(req , res){
+    app.get("/api/" + file.split('.', 1), function(req , res){
         var query = getFile('sql/' + file);
         executeQuery(res, query);
     });
