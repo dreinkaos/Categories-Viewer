@@ -11,7 +11,9 @@
       {"key": "FADESCRI", "value": "Famiglia"},
       {"key": "ARCATOMO", "value": "Codice categoria omogenea"},
       {"key": "OMDESCRI", "value": "Categoria omogenea"}    
-    ]
+    ],
+    SERVER_ADDRESS: "http://localhost:3000"
+
  }
 
 /*
