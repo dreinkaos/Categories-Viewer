@@ -80,7 +80,7 @@ var executeQuery = function(res, sqlquery){
     }); 
 }
 
-app.get('/api/getResource', (req, res) => {
+app.get('/node/express/api/getResource', (req, res) => {
     //var tableName = 'articles';
     var tableName = req.param('resourceName');
     db.all('select "value", "updatetime" FROM "' + tableName + '" ORDER BY "updatetime" DESC',
@@ -99,7 +99,7 @@ app.get('/api/getResource', (req, res) => {
     });
 });
     
-app.post('/api/setResource', function(req, res){
+app.post('/node/express/api/setResource', function(req, res){
     //var tableName = 'articles';
     var requestValue = req.body.value;
     var tableName = req.body.resourceName;
@@ -125,7 +125,7 @@ app.post('/api/setResource', function(req, res){
 
 //GENERATES WS FOR EACH QUERY FOUND IN SQL FOLDER
 fs.readdirSync(sqlFolder).forEach(file => {
-    app.get("/api/" + file.split('.', 1), function(req , res){
+    app.get("/node/express/api/" + file.split('.', 1), function(req , res){
         var query = getFile('sql/' + file);
         executeQuery(res, query);
     });
