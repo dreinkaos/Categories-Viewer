@@ -12,34 +12,6 @@
       {"key": "ARCATOMO", "value": "Codice categoria omogenea"},
       {"key": "OMDESCRI", "value": "Categoria omogenea"}    
     ],
-    SERVER_ADDRESS: "http://localhost:3000"
+    SERVER_ADDRESS: "http://srv-app/node/express/api/"
 
  }
-
-/*
- export const AppConfigurations = {
-  rootLevel: {
-    name: 'ARCATOMO',
-    label: "Categoria omogenea",
-    resource: "homogeneousCategories"
-},
-
-secondLevel: {
-  name: 'ARCODFAM',
-  label: "Famiglia",
-  resource: "familyCategories"
-},
-
-thirdLevel: {
-  name: 'ARGRUMER',
-  label: "Gruppo merceologico",
-  resource: "merceologicalCategories"
-},
-
-article: {
-  name: 'ARCODART',
-  label: "Articolo",
-  resource: "articles"
-}
-  
- }*/
