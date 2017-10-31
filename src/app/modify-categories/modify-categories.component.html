@@ -20,7 +20,7 @@
 
 <button (click)="save()" mat-raised-button>Salva</button>
 <table>
-  <th>Chiave</th><th>Valore</th><th>DEBUG</th><th>Attivo</th>
+  <th>Chiave</th><th>Valore</th><th>Attivo</th>
   <tr *ngFor="let category of categories[selectedCategory] | filterOptionsByValue:filter.value | filterOptionsByState:isActive"
     [class.highlighted]="(selectedRow) && category.key == selectedRow.key">
     <td (click)="onItemClick(category, $event)">{{ category.key }}</td>
@@ -37,7 +37,6 @@
     </td>
       
     <td (click)="onItemClick(category, $event)" *ngIf="(!selectedRow) || (selectedRow && category.key != selectedRow.key)">{{ category.value }}</td>
-    <td>{{ category |json }}</td>
     <td>
       <mat-slide-toggle [(ngModel)]="category.active">      
       </mat-slide-toggle>        
