@@ -10,42 +10,42 @@ export class SqlServerService {
   constructor(private http: Http) { }
 
   getItems(): Promise<any[]> { 
-    return this.http.get(this.address + "/api/getItems")
+    return this.http.get(this.address + "getItems")
     .toPromise()
     .then(response => response.json())
     .catch(this.handleError);
   }  
 
   getAccountingCategories(): Promise<any[]> {
-    return this.http.get(this.address + "/api/getAccountingCategories")
+    return this.http.get(this.address + "getAccountingCategories")
     .toPromise()
     .then(response => response.json())
     .catch(this.handleError);
   }
 
   getAnaliticCategories(): Promise<any[]> {
-    return this.http.get(this.address + "/api/getAnaliticCategories")
+    return this.http.get(this.address + "getAnaliticCategories")
     .toPromise()
     .then(response => response.json())
     .catch(this.handleError);
   }
 
   getFamilyCategories(): Promise<any[]> {
-    return this.http.get(this.address + "/api/getFamilyCategories")
+    return this.http.get(this.address + "getFamilyCategories")
     .toPromise()
     .then(response => response.json())
     .catch(this.handleError);
   }
 
   getHomogeneousCategories(): Promise<any[]> {
-    return this.http.get(this.address + "/api/getHomogeneousCategories")
+    return this.http.get(this.address + "getHomogeneousCategories")
     .toPromise()
     .then(response => response.json())
     .catch(this.handleError);
   }
 
   getMerceologicalCategories(): Promise<any[]> {
-    return this.http.get(this.address + "/api/getMerceologicalCategories")
+    return this.http.get(this.address + "getMerceologicalCategories")
     .toPromise()
     .then(response => response.json())
     .catch(this.handleError);
