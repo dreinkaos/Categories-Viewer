@@ -4,7 +4,7 @@
 <button *ngIf="!readOnly" mat-raised-button type="button" (click)="saveArticles()">Salva</button>
 <div class="leftSide">        
     <span style="margin: 1em;height:500px;">
-        <tree-root #tree [(nodes)]="nodes" (activate)="setSelectedNode($event)" [options]="options" style="overflow:hidden;">
+        <tree-root #tree [(nodes)]="nodes" (activate)="setSelectedNode($event)" [options]="options" style="overflow:hidden;" (initialized)="onTreeInit($event)">
             <ng-template #treeNodeTemplate let-node let-index="index">
                 <span *ngIf="node.data.children && node.data.type != 'title'">   
                     <span>{{ node.data.name  | valueByKey: categories[node.data.type] }}</span>

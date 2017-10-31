@@ -13,7 +13,7 @@ export class CategoriesTreeComponent implements OnInit {
   selectedNode: any;
   nodes: any[];
   filter: string;
-  //options = {useVirtualScroll: true};
+  options = {useVirtualScroll: true};
   ROOTLEVEL: string = AppConfigurations.ROOTLEVEL;
   SECONDLEVEL: string = AppConfigurations.SECONDLEVEL;
   THIRDLEVEL: string = AppConfigurations.THIRDLEVEL;
@@ -31,13 +31,16 @@ export class CategoriesTreeComponent implements OnInit {
 
   ngOnInit() {}
 
+  onTreeInit(event){
+    console.log(event);    
+  }
 
   filterNodes(filter: string){
     if (filter.length > 2){
       this.treeComponent.treeModel.filterNodes(filter, true);    
     }
     else{
-      this.treeComponent.treeModel.filterNodes("", true);    
+      this.treeComponent.treeModel.clearFilter();    
     }
   }
 
@@ -46,11 +49,11 @@ export class CategoriesTreeComponent implements OnInit {
         this.parentSubject.subscribe(event => {
         if (this.selectedNode){
           this.selectedNode.setIsActive(false);        
-        }
+        }     
+        this.treeComponent.treeModel.virtualScroll.setViewport(this.treeComponent.treeModel.virtualScroll.viewport);   
       });
     }
-    this.generateTree();    
-    
+    this.generateTree();   
   }
 
   saveArticles(){
@@ -112,6 +115,6 @@ export class CategoriesTreeComponent implements OnInit {
         }        
         this.nodes.push(root);
     }
-    this.nodes.unshift(titleRoot);      
+    this.nodes.unshift(titleRoot);             
   }
 }

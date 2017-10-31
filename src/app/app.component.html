@@ -21,6 +21,7 @@
             <!--h3>Categorie in sola visualizzazione</h3-->
             <div class="demo-tab-content">
                 <categories-tree 
+                [parentSubject]="parentSubject"
                 [data]="originalItemsDictionary" 
                 [categories]="categories"                 
                 [readOnly]="true"></categories-tree>
