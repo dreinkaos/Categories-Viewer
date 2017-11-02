@@ -44,7 +44,7 @@
             {{ category.value }}
           </td>
           <td width="30%">
-            <mat-slide-toggle [(ngModel)]="category.active"></mat-slide-toggle>        
+            <mat-slide-toggle [(ngModel)]="category.active" (change)="onSlideChange(category)"></mat-slide-toggle>        
           </td> 
 
         </tr>

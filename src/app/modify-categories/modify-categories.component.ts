@@ -37,6 +37,10 @@ export class ModifyCategoriesComponent implements OnInit {
     this.subject.next(item);
   }
 
+  onSlideChange(category){
+    this.modified = true;
+  }
+
   restoreAndClick(item){
     item.value = this.oldValue;
     this.onItemClick(item);
