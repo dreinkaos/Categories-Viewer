@@ -131,6 +131,25 @@ export class AppComponent implements OnInit {
           }
         }        
       }
+
+      for (var ii in this.categories[this.ROOTLEVEL]){        
+          if (!this.categories[this.ROOTLEVEL][ii].active)
+            this.categories[this.ROOTLEVEL][ii].active = false;                    
+      }
+
+      for (var ii in this.categories[this.SECONDLEVEL]){
+          if (!this.categories[this.SECONDLEVEL][ii].active)
+            this.categories[this.SECONDLEVEL][ii].active = false;
+        
+      }
+
+      for (var ii in this.categories[this.THIRDLEVEL]){        
+          if (!this.categories[this.THIRDLEVEL][ii].active)
+            this.categories[this.THIRDLEVEL][ii].active = false;
+        
+      }  
+
+
   }
 
   saveArticles(){

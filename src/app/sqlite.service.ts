@@ -21,7 +21,7 @@ export class SqliteService {
   }  
 
   setResource(resourceName: string, resource: any): Promise<boolean>{
-    var fullResourceServiceName: string = this.getResourceWebServiceName('set');
+    var fullResourceServiceName: string = this.getResourceWebServiceName('set');    
     const body = {value: resource, resourceName:resourceName}; 
     return this.http.post(fullResourceServiceName, body)
     .toPromise()
