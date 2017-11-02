@@ -4,6 +4,7 @@ import { TreeComponent} from 'angular-tree-component';
 import { ValueByKeyPipe } from '../value-by-key.pipe';
 import { Subject } from 'rxjs/Subject';
 
+
 @Component({
   selector: 'categories-tree',
   templateUrl: './categories-tree.component.html',
@@ -19,7 +20,7 @@ export class CategoriesTreeComponent implements OnInit {
   SECONDLEVEL: string = AppConfigurations.SECONDLEVEL;
   THIRDLEVEL: string = AppConfigurations.THIRDLEVEL;
   COLUMNS = AppConfigurations.COLUMNS;
-  @ViewChild('tree') treeComponent: TreeComponent;
+  @ViewChild('tree') treeComponent: TreeComponent;  
   @Input() data;
   @Input() categories;
   @Input() readOnly?: boolean;
@@ -28,13 +29,9 @@ export class CategoriesTreeComponent implements OnInit {
   @Output() updateArticleCategoryInParent = new EventEmitter<boolean>();  
   @Output() saveArticlesInParent = new EventEmitter<boolean>();
 
-  constructor(private valueByKeyPipe: ValueByKeyPipe) { }
+  constructor(private valueByKeyPipe: ValueByKeyPipe) {}
 
   ngOnInit() {}
-
-  onTreeInit(event){
-    console.log(event);    
-  }
 
   transformText(node) {
     return this.valueByKeyPipe.transform(node.data.name, this.categories[node.data.type]);
@@ -44,7 +41,6 @@ export class CategoriesTreeComponent implements OnInit {
     if (filter.length > 2){
       this.treeComponent.treeModel.filterNodes((node) => {
         var nodeText = this.transformText(node);
-        console.log(filter, nodeText);
         return nodeText.toLowerCase().startsWith(filter.toLowerCase());
       });
     }
@@ -61,7 +57,7 @@ export class CategoriesTreeComponent implements OnInit {
         }     
         this.treeComponent.treeModel.virtualScroll.setViewport(this.treeComponent.treeModel.virtualScroll.viewport);   
       });
-    }
+    }    
     this.generateTree();   
   }
 

@@ -29,7 +29,7 @@ import { FilterOptionsByStatePipe } from './filter-options-by-state.pipe';
     CategoryComponent,
     CategoriesTreeComponent,
     ModifyCategoriesComponent,
-    FilterOptionsByStatePipe    
+    FilterOptionsByStatePipe
   ],
   imports: [
     BrowserModule,

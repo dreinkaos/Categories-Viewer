@@ -1,5 +1,5 @@
 <mat-form-field>
-    <input matInput type="text" [(ngModel)]="filter" placeholder="Filtra nodi" (ngModelChange)="filterNodes($event)">
+    <input matInput type="text" [(ngModel)]="filter" placeholder="Filtra albero" (ngModelChange)="filterNodes($event)">
 </mat-form-field>
 <button *ngIf="!readOnly" mat-raised-button type="button" (click)="saveArticles()">Salva</button>
 <div class="leftSide">        
