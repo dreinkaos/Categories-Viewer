@@ -49,7 +49,7 @@ import { FilterOptionsByStatePipe } from './filter-options-by-state.pipe';
     MatProgressBarModule,
     MatSnackBarModule
   ],
-  providers: [SqlServerService, SqliteService],
+  providers: [SqlServerService, SqliteService, ValueByKeyPipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

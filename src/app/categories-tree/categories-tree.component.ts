@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { AppConfigurations } from '../app-config';
-import { TreeComponent, TreeModel, TreeNode } from 'angular-tree-component';
+import { TreeComponent} from 'angular-tree-component';
+import { ValueByKeyPipe } from '../value-by-key.pipe';
 import { Subject } from 'rxjs/Subject';
 
 @Component({
@@ -27,7 +28,7 @@ export class CategoriesTreeComponent implements OnInit {
   @Output() updateArticleCategoryInParent = new EventEmitter<boolean>();  
   @Output() saveArticlesInParent = new EventEmitter<boolean>();
 
-  constructor() { }
+  constructor(private valueByKeyPipe: ValueByKeyPipe) { }
 
   ngOnInit() {}
 
@@ -35,9 +36,17 @@ export class CategoriesTreeComponent implements OnInit {
     console.log(event);    
   }
 
+  transformText(node) {
+    return this.valueByKeyPipe.transform(node.data.name, this.categories[node.data.type]);
+  }
+
   filterNodes(filter: string){
     if (filter.length > 2){
-      this.treeComponent.treeModel.filterNodes(filter, true);    
+      this.treeComponent.treeModel.filterNodes((node) => {
+        var nodeText = this.transformText(node);
+        console.log(filter, nodeText);
+        return nodeText.toLowerCase().startsWith(filter.toLowerCase());
+      });
     }
     else{
       this.treeComponent.treeModel.clearFilter();    
