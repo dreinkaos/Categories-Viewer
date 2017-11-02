@@ -51,17 +51,4 @@ export class ModifyCategoriesComponent implements OnInit {
       this.oldValue = item.value;       
     }    
   }
-
-  
-
-  /*setHighlighted(item, event){
-    var itemIndex = this.highlightedRows.indexOf(item);
-    if (itemIndex == -1){
-      this.highlightedRows.push(item);
-    }
-    else{
-      this.highlightedRows.splice(itemIndex, 1);
-    }    
-  }*/
-
 }

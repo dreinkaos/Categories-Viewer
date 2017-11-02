@@ -79,8 +79,22 @@ export class CategoriesTreeComponent implements OnInit {
       event.node.findNextNode(true).setIsActive(true);
       event.node.findNextNode(true).focus();
     }
-    else{
+    else{      
+      var nodeType = event.node.data.type;
+      if (nodeType == this.ROOTLEVEL){
+        event.node.data[this.ROOTLEVEL] = event.node.data.name;
+      }
+      else if (nodeType == this.SECONDLEVEL){
+        event.node.data[this.SECONDLEVEL] = event.node.data.name;
+        event.node.data[this.ROOTLEVEL] = event.node.parent.data.name;
+      }
+      else{
+        event.node.data[this.THIRDLEVEL] = event.node.data.name;
+        event.node.data[this.SECONDLEVEL] = event.node.parent.data.name;
+        event.node.data[this.ROOTLEVEL] = event.node.parent.parent.data.name;
+      }
       this.selectedNode = event.node;    
+      
     }    
   }
 
