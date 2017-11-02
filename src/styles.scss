@@ -75,6 +75,10 @@ body{
     background-color: $rejectColor;
 }
 
+.mat-form-field{
+    min-width: 300px;
+}
+
 /* Absolute Center Spinner */
 .loading-indicator {
     position: fixed;
