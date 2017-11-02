@@ -20,6 +20,7 @@ export class CategoriesTreeComponent implements OnInit {
   SECONDLEVEL: string = AppConfigurations.SECONDLEVEL;
   THIRDLEVEL: string = AppConfigurations.THIRDLEVEL;
   COLUMNS = AppConfigurations.COLUMNS;
+  modified: boolean = false;
   @ViewChild('tree') treeComponent: TreeComponent;  
   @Input() data;
   @Input() categories;
@@ -63,15 +64,18 @@ export class CategoriesTreeComponent implements OnInit {
 
   saveArticles(){
     this.saveArticlesInParent.emit(true);
+    this.modified = false;
   }
 
   updateItemsCategory(node){
-    this.updateItemsCategoryInParent.emit(node);       
+    this.updateItemsCategoryInParent.emit(node);  
+    this.modified = true;     
     node.setIsActive(false);    
   }
 
   updateArticleCategory(node){
-    this.updateArticleCategoryInParent.emit(node);    
+    this.updateArticleCategoryInParent.emit(node);
+    this.modified = true;    
   }
 
   setSelectedNode(event){

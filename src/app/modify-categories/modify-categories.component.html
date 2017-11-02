@@ -17,30 +17,40 @@
     Tutti
   </mat-radio-button>
 </mat-radio-group>
+<table class="fixed_headers">    
+    <thead class="fixedHeader">
+      <tr>
+        <th width="20%">Chiave</th>
+        <th width="50%">Valore</th>
+        <th width="30%">Attivo</th>
+      </tr>
+    </thead>    
+    <tbody class="scrollContent">
+        <tr *ngFor="let category of categories[selectedCategory] | filterOptionsByValue:filter.value | filterOptionsByState:isActive"
+          [class.highlighted]="(selectedRow) && category.key == selectedRow.key">
+          <td width="20%" (click)="onItemClick(category, $event)">{{ category.key }}</td>
+          <td width="50%" *ngIf="(selectedRow) && category.key == selectedRow.key">
+              <mat-form-field style="width:60%">
+                  <input matInput [(ngModel)]="category.value" #filter placeholder="Modifica" />            
+              </mat-form-field>
+              <button (click)="onItemClick(category, $event)" mat-icon-button>
+                  <mat-icon><i class="material-icons" id="done">done</i></mat-icon>
+              </button>
+              <button (click)="restoreAndClick(category, $event)" mat-icon-button>
+                  <mat-icon><i class="material-icons" id="clear">clear</i></mat-icon>
+              </button>
+          </td>          
+          <td width="50%" (click)="onItemClick(category, $event)" *ngIf="(!selectedRow) || (selectedRow && category.key != selectedRow.key)">
+            {{ category.value }}
+          </td>
+          <td width="30%">
+            <mat-slide-toggle [(ngModel)]="category.active"></mat-slide-toggle>        
+          </td> 
 
-<button (click)="save()" mat-raised-button>Salva</button>
-<table>
-  <th>Chiave</th><th>Valore</th><th>Attivo</th>
-  <tr *ngFor="let category of categories[selectedCategory] | filterOptionsByValue:filter.value | filterOptionsByState:isActive"
-    [class.highlighted]="(selectedRow) && category.key == selectedRow.key">
-    <td (click)="onItemClick(category, $event)">{{ category.key }}</td>
-    <td *ngIf="(selectedRow) && category.key == selectedRow.key">
-        <mat-form-field>
-            <input matInput [(ngModel)]="category.value" #filter placeholder="Modifica" />            
-        </mat-form-field>
-        <button (click)="onItemClick(category, $event)" mat-icon-button>
-            <mat-icon><i class="material-icons" id="done">done</i></mat-icon>
-        </button>
-        <button (click)="restoreAndClick(category, $event)" mat-icon-button>
-            <mat-icon><i class="material-icons" id="clear">clear</i></mat-icon>
-        </button>
-    </td>
-      
-    <td (click)="onItemClick(category, $event)" *ngIf="(!selectedRow) || (selectedRow && category.key != selectedRow.key)">{{ category.value }}</td>
-    <td>
-      <mat-slide-toggle [(ngModel)]="category.active">      
-      </mat-slide-toggle>        
-    </td>
-    
-  </tr>
-</table>
+        </tr>
+    </tbody>
+  </table>
+  <div *ngIf="modified" style="margin:1em;">
+      I dati sono stati modificati. <button (click)="save()" mat-raised-button>Salva</button>
+  </div>
+  

@@ -16,6 +16,7 @@ export class ModifyCategoriesComponent implements OnInit {
   selectedRow: any;
   selectedCategory: string;
   oldValue: string;
+  modified: boolean = false;
   columnsTranslations: any[] = AppConfigurations.COLUMNS;
   private subject: Subject<string> = new Subject();
 
@@ -43,6 +44,10 @@ export class ModifyCategoriesComponent implements OnInit {
   
   setHighlighted(item){ 
     if (this.selectedRow == item){
+      if (item.value != this.oldValue)
+      {
+        this.modified = true;
+      }      
       this.selectedRow = null;
       this.oldValue = null;      
     }

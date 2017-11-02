@@ -40,7 +40,6 @@ export class AppComponent implements OnInit {
   onSelectedArticleChange(value){
     for (var index in this.newItems){
       if (this.newItems[index].ARCODART === value.ARCODART){
-        console.log(value, this.newItems[index])
         this.newItems[index] = value;
         break;
       }
@@ -96,10 +95,10 @@ export class AppComponent implements OnInit {
       if (node.data[this.THIRDLEVEL] != undefined)
         this.newItems[index][this.THIRDLEVEL] = node.data[this.THIRDLEVEL];
     }
-    this.newItemsDictionary = this.dictionaryFromData(this.newItems);  
+    this.newItemsDictionary = this.dictionaryFromData(this.newItems);      
   }
 
-  initializeDataToAdHocSituation(){
+  private initializeDataToAdHocSituation(){
     Promise.all([
       this.sqlService.getHomogeneousCategories().then(data => this.categories[this.ROOTLEVEL] = data),
       this.sqlService.getFamilyCategories().then(data => this.categories[this.SECONDLEVEL] = data),      
@@ -153,7 +152,7 @@ export class AppComponent implements OnInit {
   }
 
   saveArticles(){
-    this.sqliteService.setResource("articles", this.newItems).then(()=>this.showMessage("Dati salvati con successo!", null)); 
+    this.sqliteService.setResource("articles", this.newItems).then(()=>this.showMessage("Dati salvati correttamente", null)); 
   }
 
   saveCategories(categories){
@@ -171,7 +170,7 @@ export class AppComponent implements OnInit {
       }
       this.sqliteService.setResource(serviceName, this.categories[category]).then(()=>{
         this.categories[category] = categories[category];
-        this.showMessage("Dati salvati con successo!", null);
+        this.showMessage("Categorie salvate correttamente", null);
       }); 
     }    
   }
