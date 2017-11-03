@@ -14,6 +14,8 @@ export class CategoryComponent implements OnInit {
   ROOTLEVEL: string = AppConfigurations.ROOTLEVEL;
   SECONDLEVEL: string = AppConfigurations.SECONDLEVEL;
   THIRDLEVEL: string = AppConfigurations.THIRDLEVEL;
+  selectionHasChanged: boolean = false;
+  oldReferences: any = {};
   constructor() { }
 
   ngOnInit() {
@@ -22,9 +24,19 @@ export class CategoryComponent implements OnInit {
   confirmChanges(event){
     this.updateItemsCategory.emit(this.node);
     this.node = undefined;
+    this.selectionHasChanged = false;
   }
 
   onSelectChange(value, reference){
-    this.node.data[reference] = value;    
+    this.oldReferences[reference] = this.node.data[reference];
+    this.node.data[reference] = value;  
+    this.selectionHasChanged = true;
+  }
+
+  reject(event){
+    for (var reference in this.oldReferences){
+      this.node.data[reference] = this.oldReferences[reference];
+    }
+    this.selectionHasChanged = false;
   }
 }
