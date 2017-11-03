@@ -1,0 +1,11 @@
+<h1 mat-dialog-title>Inserimento nuova categoria</h1>
+<div mat-dialog-content>
+  <p>Inserisci il nome della categoria</p>
+  <mat-form-field>
+    <input matInput tabindex="1" [(ngModel)]="data.categoryName">    
+  </mat-form-field>  
+</div>
+<div mat-dialog-actions>
+  <button mat-button [mat-dialog-close]="data.categoryName" tabindex="2">Ok</button>
+  <button mat-button (click)="onNoClick()" tabindex="-1">Annulla</button>
+</div>
