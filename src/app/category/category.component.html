@@ -17,5 +17,8 @@
         (selectionChanged)="onSelectChange($event, THIRDLEVEL)"
         *ngIf="node.data.type == THIRDLEVEL">
         </dropdown-with-filter>       
-    <button *ngIf="node.data[ROOTLEVEL] || node.data[SECONDLEVEL] || node.data[THIRDLEVEL]" mat-raised-button (click)="confirmChanges($event)">Applica modifica</button>
+    <button *ngIf="node.data[ROOTLEVEL] || node.data[SECONDLEVEL] || node.data[THIRDLEVEL]"
+         mat-raised-button color="warn" (click)="confirmChanges($event)">
+         Applica modifica
+    </button>
 </span>

@@ -12,12 +12,14 @@ import { DropdownWithFilterComponent } from './dropdown-with-filter/dropdown-wit
 import { FilterOptionsByValuePipe } from './filter-options-by-value.pipe';
 import { CategoryComponent } from './category/category.component';
 import { CategoriesTreeComponent } from './categories-tree/categories-tree.component';
-import { MatSnackBarModule, MatTabsModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatSlideToggleModule, MatRadioModule, MatButtonModule, MatIconModule, MatProgressSpinnerModule, MatProgressBarModule } from '@angular/material';
+import { MatSnackBarModule, MatTabsModule, MatFormFieldModule, MatInputModule, MatSelectModule, 
+  MatSlideToggleModule, MatRadioModule, MatButtonModule, MatIconModule, MatProgressSpinnerModule, MatProgressBarModule, MatDialogModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ModifyCategoriesComponent } from './modify-categories/modify-categories.component';
 import { FilterOptionsByStatePipe } from './filter-options-by-state.pipe';
+import { AddCategoryDialogComponent } from './add-category-dialog/add-category-dialog.component';
 
 @NgModule({ 
   declarations: [
@@ -29,7 +31,8 @@ import { FilterOptionsByStatePipe } from './filter-options-by-state.pipe';
     CategoryComponent,
     CategoriesTreeComponent,
     ModifyCategoriesComponent,
-    FilterOptionsByStatePipe
+    FilterOptionsByStatePipe,
+    AddCategoryDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -47,9 +50,13 @@ import { FilterOptionsByStatePipe } from './filter-options-by-state.pipe';
     MatIconModule,
     MatProgressSpinnerModule,
     MatProgressBarModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatDialogModule
   ],
   providers: [SqlServerService, SqliteService, ValueByKeyPipe],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [
+    AddCategoryDialogComponent
+  ],
 })
 export class AppModule { }

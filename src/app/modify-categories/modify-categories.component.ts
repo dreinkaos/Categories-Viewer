@@ -1,4 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { AddCategoryDialogComponent } from '../add-category-dialog/add-category-dialog.component';
 import { AppConfigurations } from '../app-config';
 import { Subject } from 'rxjs';
 
@@ -20,7 +22,18 @@ export class ModifyCategoriesComponent implements OnInit {
   columnsTranslations: any[] = AppConfigurations.COLUMNS;
   private subject: Subject<string> = new Subject();
 
-  constructor() {}
+  constructor(public dialog: MatDialog) {}
+
+  openDialog(): void {
+    let dialogRef = this.dialog.open(AddCategoryDialogComponent, {
+      width: '400px',
+      data: { categoryName: "" }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);      
+    });
+  }
 
   ngOnInit() {    
     this.selectedCategory = AppConfigurations.ROOTLEVEL;

@@ -1,10 +1,10 @@
-<div style="margin: 1em;">
-    <h1>Aggiornamento categorie</h1>
-    
-    <div class="loading-indicator" *ngIf="loading">
-        <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
-      </div>
-    <mat-tab-group (selectedIndexChange)="pageChanged()" *ngIf="!loading">
+<div class="loading-indicator" *ngIf="loading">
+    <mat-progress-spinner color="warn" mode="indeterminate"></mat-progress-spinner>
+</div>
+<div style="margin: 1em;" *ngIf="!loading">
+    <h1>MAGRIS GROUP</h1>
+    <h2>Gestione delle categorie degli articoli.</h2>
+    <mat-tab-group (selectedIndexChange)="pageChanged()">
         <mat-tab label="Nuove categorie">
             <div class="demo-tab-content">
                 <categories-tree 
@@ -18,7 +18,6 @@
             </div>
         </mat-tab>
         <mat-tab label="Categorie AD HOC">
-            <!--h3>Categorie in sola visualizzazione</h3-->
             <div class="demo-tab-content">
                 <categories-tree 
                 [parentSubject]="parentSubject"

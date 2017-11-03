@@ -6,17 +6,18 @@
 <mat-form-field>
     <input matInput #filter placeholder="Filtra categoria per valore">    
 </mat-form-field>  
-<mat-radio-group [(ngModel)]="isActive">
-  <mat-radio-button [value]="true">
+<mat-radio-group [(ngModel)]="isActive" >
+  <mat-radio-button [value]="true" color="warn">
     Attivo
   </mat-radio-button>
-  <mat-radio-button [value]="false">
+  <mat-radio-button [value]="false" color="warn">
     Non attivo
   </mat-radio-button>
-  <mat-radio-button [value]="undefined">
+  <mat-radio-button [value]="undefined" color="warn">
     Tutti
   </mat-radio-button>
 </mat-radio-group>
+<button color="warn" mat-raised-button (click)="openDialog()">Nuova categoria</button>
 <table class="fixed_headers">    
     <thead class="fixedHeader">
       <tr>
@@ -51,6 +52,6 @@
     </tbody>
   </table>
   <div *ngIf="modified" style="margin:1em;">
-      I dati sono stati modificati. <button (click)="save()" mat-raised-button>Salva</button>
+      I dati sono stati modificati. <button (click)="save()" mat-raised-button color="warn">Salva</button>
   </div>
   

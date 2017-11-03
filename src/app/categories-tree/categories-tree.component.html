@@ -2,7 +2,7 @@
     <input matInput type="text" [(ngModel)]="filter" placeholder="Filtra albero" (ngModelChange)="filterNodes($event)">
 </mat-form-field>
 <div class="leftSide">        
-    <span style="margin: 1em;">
+    <span style="margin: 1em; height:500px;">
         <tree-root #tree [(nodes)]="nodes" (activate)="setSelectedNode($event)" [options]="options" style="overflow:hidden;">
             <ng-template #treeNodeTemplate let-node let-index="index">
                 <span *ngIf="node.data.children && node.data.type != 'title'">   
@@ -24,5 +24,5 @@
     </span>
 </div>
 <div *ngIf="!readOnly && modified">
-    I dati sono stati modificati. <button mat-raised-button type="button" (click)="saveArticles()">Salva</button>
+    I dati sono stati modificati. <button mat-raised-button color="warn" type="button" (click)="saveArticles()">Salva</button>
 </div>
