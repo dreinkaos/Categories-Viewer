@@ -1,5 +1,5 @@
 <span *ngIf="node && node.data.article && node.isActive">
-    Cambia categorie per questo articolo
+    <h2>Cambia categorie per questo articolo</h2>
     <dropdown-with-filter label="Categoria omogenea:"
         [reference]="node.data.article[ROOTLEVEL]" 
         [values]="categories[ROOTLEVEL]"
@@ -15,5 +15,12 @@
             [values]="categories[THIRDLEVEL]"
             (selectionChanged)="onSelectChange($event, THIRDLEVEL) ">
     </dropdown-with-filter>
-    <button *ngIf="node.data.article[ROOTLEVEL] && node.data.article[SECONDLEVEL] && node.data.article[THIRDLEVEL]" mat-raised-button (click)="confirmChanges($event)">Applica modifica</button>
+    <button *ngIf="selectionHasChanged" 
+        mat-raised-button color="warn" (click)="confirmChanges($event)">
+        Applica modifica
+    </button>
+    <button *ngIf="selectionHasChanged"
+        mat-raised-button color="warn" (click)="reject($event)">
+        Annulla modifica
+    </button>
 </span>

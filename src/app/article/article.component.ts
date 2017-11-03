@@ -14,14 +14,27 @@ export class ArticleComponent implements OnInit {
   ROOTLEVEL: string = AppConfigurations.ROOTLEVEL;
   SECONDLEVEL: string = AppConfigurations.SECONDLEVEL;
   THIRDLEVEL: string = AppConfigurations.THIRDLEVEL;
+  selectionHasChanged: boolean = false;
+  oldReferences: any = {};
   constructor() {}
 
   confirmChanges(event){
     this.updateArticle.emit(this.node.data.article);
+    this.node = undefined;
+    this.selectionHasChanged = false;
   }
 
   onSelectChange(value, reference){
+    this.oldReferences[reference] = this.node.data.article[reference];
     this.node.data.article[reference] = value;
+    this.selectionHasChanged = true;
+  }
+  
+  reject(event){
+    for (var reference in this.oldReferences){
+      this.node.data.article[reference] = this.oldReferences[reference];
+    }
+    this.selectionHasChanged = false;
   }
 
   ngOnInit() {}

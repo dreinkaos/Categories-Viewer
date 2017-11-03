@@ -1,5 +1,5 @@
 <span *ngIf="node && node.data.children && node.isActive">
-        Modifica categoria per tutti gli articoli
+        <h2>Le modifiche verranno applicate a tutti gli articoli del gruppo selezionato</h2>
         <dropdown-with-filter label="Categoria omogenea"
             [reference]="node.data[ROOTLEVEL]" 
             [values]="categories[ROOTLEVEL]"
@@ -21,10 +21,8 @@
          mat-raised-button color="warn" (click)="confirmChanges($event)">
          Applica modifica
     </button>
-
     <button *ngIf="selectionHasChanged"
         mat-raised-button color="warn" (click)="reject($event)">
         Annulla modifica
     </button>
-    
 </span>
