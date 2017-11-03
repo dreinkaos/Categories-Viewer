@@ -25,14 +25,34 @@ export class ModifyCategoriesComponent implements OnInit {
   constructor(public dialog: MatDialog) {}
 
   openDialog(): void {
+    var categoriesNames = this.categories[this.selectedCategory].map(category => this.sanitiseText(category.value));
+    var categoriesKeys = this.categories[this.selectedCategory].map(category => this.sanitiseText(category.key));
     let dialogRef = this.dialog.open(AddCategoryDialogComponent, {
       width: '400px',
-      data: { categoryName: "", categories: this.categories[this.selectedCategory]}
+      data: { categoryName: "", categories: categoriesNames}
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);      
+      if (result != undefined){
+        var key = this.getUniqueIDForCategory(result, categoriesKeys);
+        this.categories[this.selectedCategory].unshift({"key":key, "value":result, "active":true});
+        this.modified = true;
+      }      
     });
+  }
+
+  private getUniqueIDForCategory(categoryName: string, categoriesKeys: string[]){
+    var text = categoryName.slice(0, 5);
+    if (categoriesKeys.indexOf(text) == -1){
+      return text
+    }
+    else{
+      return this.getUniqueIDForCategory(categoryName.substring(1), categoriesKeys);
+    }
+  }
+
+  private sanitiseText(text:string){
+    return text.trim().toLowerCase();
   }
 
   ngOnInit() {    

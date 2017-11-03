@@ -16,9 +16,7 @@ export class AddCategoryDialogComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<AddCategoryDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any) { 
-      this.categoriesNames = data.categories.map(category => this.sanitiseText(category.value));
-    }
+    @Inject(MAT_DIALOG_DATA) public data: any) {}
 
   private sanitiseText(text:string){
     return text.trim().toLowerCase();
@@ -30,7 +28,7 @@ export class AddCategoryDialogComponent implements OnInit {
 
   isValidName(){   
     var sanitisedText = this.sanitiseText(this.data.categoryName);
-    if (this.categoriesNames.indexOf(sanitisedText) > -1){
+    if (this.data.categories.indexOf(sanitisedText) > -1){
       this.showErrors = true;
     }
     else{
