@@ -2,10 +2,11 @@
 <div mat-dialog-content>
   <p>Inserisci il nome della categoria</p>
   <mat-form-field>
-    <input matInput tabindex="1" [(ngModel)]="data.categoryName">    
+    <input matInput tabindex="1" [(ngModel)]="data.categoryName" (keyup)="isValidName()">    
   </mat-form-field>  
+  <p class="error" *ngIf="showErrors">Il nome è già in uso.</p>
 </div>
 <div mat-dialog-actions>
-  <button mat-button [mat-dialog-close]="data.categoryName" tabindex="2">Ok</button>
-  <button mat-button (click)="onNoClick()" tabindex="-1">Annulla</button>
+  <button mat-button [disabled]="showErrors" color="warn" [mat-dialog-close]="data.categoryName" tabindex="2">Ok</button>
+  <button mat-button color="primary" (click)="onNoClick()" tabindex="-1">Annulla</button>
 </div>

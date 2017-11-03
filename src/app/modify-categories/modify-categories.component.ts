@@ -27,7 +27,7 @@ export class ModifyCategoriesComponent implements OnInit {
   openDialog(): void {
     let dialogRef = this.dialog.open(AddCategoryDialogComponent, {
       width: '400px',
-      data: { categoryName: "" }
+      data: { categoryName: "", categories: this.categories[this.selectedCategory]}
     });
 
     dialogRef.afterClosed().subscribe(result => {
