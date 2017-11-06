@@ -15,6 +15,7 @@ export class AppComponent implements OnInit {
   SECONDLEVEL: string = AppConfigurations.SECONDLEVEL;
   THIRDLEVEL: string = AppConfigurations.THIRDLEVEL;  
   loading: boolean = true;
+  shouldSaveCategory: boolean = false;
   categories = {};
   originalItems = [];
   newItems = [];
@@ -23,9 +24,14 @@ export class AppComponent implements OnInit {
   selectedNode: any;
   nodes = [];  
 
+
   parentSubject:Subject<any> = new Subject();
   
   constructor(private sqlService: SqlServerService, private sqliteService: SqliteService, public messageBox: MatSnackBar){}
+
+  forceSave(value){
+    this.shouldSaveCategory = value;
+  }
 
   showMessage(message: string, action: string) {
     this.messageBox.open(message, action, {
@@ -175,9 +181,6 @@ export class AppComponent implements OnInit {
     }    
   }
   
-  //TODO: refactory needed. Resource names shouldn't be hardcoded but configured.
-  //      Best solution could be to have a config dictionary for each category including service names, column names and so on.
-  //      Check this hint even for saveCategories method
   private getData(): void {
     Promise.all([
       this.sqlService.getItems().then(data => this.originalItems = data),
@@ -188,7 +191,7 @@ export class AppComponent implements OnInit {
     ]).then(()=>{
       this.originalItemsDictionary = this.dictionaryFromData(this.originalItems);
       if (this.isEmptyObject(this.newItems)){
-         this.newItems = JSON.parse(JSON.stringify(this.originalItems));         
+         this.newItems = JSON.parse(JSON.stringify(this.originalItems)); //Hack: copy only values. Should use _        
       }
       this.newItemsDictionary = this.dictionaryFromData(this.newItems);
       this.loading = false;

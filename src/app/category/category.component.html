@@ -1,28 +1,32 @@
 <span *ngIf="node && node.data.children && node.isActive">
-        <h2>Le modifiche verranno applicate a tutti gli articoli del gruppo selezionato</h2>
-        <dropdown-with-filter label="Categoria omogenea"
-            [reference]="node.data[ROOTLEVEL]" 
-            [values]="categories[ROOTLEVEL]"
-            (selectionChanged)="onSelectChange($event, ROOTLEVEL)">
-        </dropdown-with-filter>
-        <dropdown-with-filter label="Famiglia"
-            [reference]="node.data[SECONDLEVEL]" 
-            [values]="categories[SECONDLEVEL]"
-            (selectionChanged)="onSelectChange($event, SECONDLEVEL)"
-            *ngIf="node.data.type == SECONDLEVEL || node.data.type == THIRDLEVEL">
-        </dropdown-with-filter>   
-        <dropdown-with-filter label="Gruppo merceologico"
+    <h2>Sposta articoli in altra categoria</h2>
+    <h3>Le modifiche verranno applicate a tutti gli articoli del gruppo selezionato</h3>
+    <dropdown-with-filter label="Categoria omogenea"
+        [reference]="node.data[ROOTLEVEL]" 
+        [values]="categories[ROOTLEVEL]"
+        (selectionChanged)="onSelectChange($event, ROOTLEVEL)">
+    </dropdown-with-filter>
+    <dropdown-with-filter label="Famiglia"
+        [reference]="node.data[SECONDLEVEL]" 
+        [values]="categories[SECONDLEVEL]"
+        (selectionChanged)="onSelectChange($event, SECONDLEVEL)"
+        *ngIf="node.data.type == SECONDLEVEL || node.data.type == THIRDLEVEL">
+    </dropdown-with-filter>   
+    <dropdown-with-filter label="Gruppo merceologico"
         [reference]="node.data[THIRDLEVEL]" 
         [values]="categories[THIRDLEVEL]"
         (selectionChanged)="onSelectChange($event, THIRDLEVEL)"
         *ngIf="node.data.type == THIRDLEVEL">
-        </dropdown-with-filter>       
-    <button *ngIf="selectionHasChanged"
-         mat-raised-button color="warn" (click)="confirmChanges($event)">
+    </dropdown-with-filter>       
+    <button 
+        *ngIf="selectionHasChanged"
+         mat-raised-button color="warn" 
+         (click)="confirmChanges($event)">
          Applica modifica
     </button>
     <button *ngIf="selectionHasChanged"
-        mat-raised-button color="warn" (click)="reject($event)">
+        mat-raised-button color="warn" 
+        (click)="reject($event)">
         Annulla modifica
     </button>
 </span>

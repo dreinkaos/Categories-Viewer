@@ -14,6 +14,7 @@ export class ModifyCategoriesComponent implements OnInit {
   
   @Input() categories: any;
   @Output() saveCategories = new EventEmitter<boolean>();
+  @Output() forceSave = new EventEmitter<boolean>();
   obj: Object = Object;
   selectedRow: any;
   selectedCategory: string;
@@ -36,9 +37,19 @@ export class ModifyCategoriesComponent implements OnInit {
       if (result != undefined){
         var key = this.getUniqueIDForCategory(result, categoriesKeys);
         this.categories[this.selectedCategory].unshift({"key":key, "value":result, "active":true});
-        this.modified = true;
+        this.setModified(true);
       }      
     });
+  }
+
+  private setModified(flag: boolean){
+    this.modified = flag;
+    if (this.modified === true){
+      this.forceSave.emit(true);      
+    }
+    else{
+      this.forceSave.emit(false);
+    }
   }
 
   private getUniqueIDForCategory(categoryName: string, categoriesKeys: string[]){
@@ -51,7 +62,7 @@ export class ModifyCategoriesComponent implements OnInit {
     }
   }
 
-  private sanitiseText(text:string){
+  private sanitiseText(text: string){
     return text.trim().toLowerCase();
   }
 
@@ -64,6 +75,7 @@ export class ModifyCategoriesComponent implements OnInit {
 
   save(){
     this.saveCategories.emit(this.categories);
+    this.setModified(false);
   }
 
   onItemClick(item){
@@ -71,7 +83,7 @@ export class ModifyCategoriesComponent implements OnInit {
   }
 
   onSlideChange(category){
-    this.modified = true;
+    this.setModified(true);
   }
 
   restoreAndClick(item){
@@ -83,7 +95,7 @@ export class ModifyCategoriesComponent implements OnInit {
     if (this.selectedRow == item){
       if (item.value != this.oldValue)
       {
-        this.modified = true;
+        this.setModified(true);
       }      
       this.selectedRow = null;
       this.oldValue = null;      

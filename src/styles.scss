@@ -9,6 +9,7 @@ $theme: mat-light-theme($primary, $accent, $warn);
 @include angular-material-theme($theme);
 $acceptColor: #66bb66;
 $acceptColorDark: #1d6d1d;
+$baseColor: #e53935;
 
 
 html, body {
@@ -32,11 +33,13 @@ h1, h2, h3, h4, h5, h6 {
     box-sizing: inherit;
 }
 
-h1 { color: #e53935; font-size: 35px; font-weight: normal; line-height: 48px; margin: 0; }
+h1 { color: $baseColor; font-size: 32px; font-weight: normal; line-height: 48px; margin: 0; }
 
-h2 { color: #e53935; font-size: 18px; font-weight: normal; line-height: 48px; margin: 0; text-decoration: underline;}
+h2 { color: $baseColor; font-size: 24px; font-weight: normal; line-height: 48px; margin: 0;}
 
-h3 { font-size: 16px; font-weight: 40; line-height: 32px; margin: 0 0 24px; font-style: italic }
+h3 { color: $baseColor; font-size: 16px; font-weight: normal; line-height: 48px; margin: 0; text-decoration: underline;}
+
+h4 { font-size: 16px; font-weight: 40; line-height: 32px; margin: 0 0 24px; font-style: italic }
 
 .tree-node-active {
     font-weight: bold;
@@ -68,11 +71,15 @@ h3 { font-size: 16px; font-weight: 40; line-height: 32px; margin: 0 0 24px; font
 }
 
 .mat-button-wrapper {
-    font-weight: bold
+    font-weight: bold;
 }
 
 .material-icons #done {
     color: $acceptColorDark;    
+}
+
+.material-icons #info{
+    font-size: 1.3em;
 }
 
 .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-bar,
@@ -119,5 +126,5 @@ h3 { font-size: 16px; font-weight: 40; line-height: 32px; margin: 0 0 24px; font
   p.error{
       font-size: 0.8em;
       font-style: italic;
-      color: #e53935;
+      color: $baseColor;
   }

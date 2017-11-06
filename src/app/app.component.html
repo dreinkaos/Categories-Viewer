@@ -3,38 +3,62 @@
 </div>
 <div style="margin: 1em;" *ngIf="!loading">
     <h1>MAGRIS GROUP</h1>
-    <h3>Gestione delle categorie degli articoli.</h3>
+    <h4>Gestione delle categorie degli articoli</h4>
     <mat-tab-group (selectedIndexChange)="pageChanged()">
-        <mat-tab label="Nuove categorie">
+        <mat-tab label="Nuove categorie" [disabled]="shouldSaveCategory">
+            <span>
+                <mat-icon color="primary">
+                    <i class="material-icons" id="info">info</i>
+                </mat-icon>
+                Seleziona una categoria per visualizzare i dettagli o espandila per vedere le sottocategorie/articoli.
+            </span>
             <div class="demo-tab-content">
                 <categories-tree 
-                [parentSubject]="parentSubject" 
-                [data]="newItemsDictionary" 
-                [(categories)]="categories" 
-                (updateItemsCategoryInParent)="onSelectedCategoryChange($event)"
-                (updateArticleCategoryInParent)="onSelectedArticleChange($event)"
-                (saveArticlesInParent)="saveArticles($event)">
-            </categories-tree>
+                    [parentSubject]="parentSubject" 
+                    [data]="newItemsDictionary" 
+                    [(categories)]="categories" 
+                    (updateItemsCategoryInParent)="onSelectedCategoryChange($event)"
+                    (updateArticleCategoryInParent)="onSelectedArticleChange($event)"
+                    (saveArticlesInParent)="saveArticles($event)">
+                </categories-tree>
             </div>
         </mat-tab>
-        <mat-tab label="Categorie AD HOC">
+        <mat-tab label="Categorie AD HOC" [disabled]="shouldSaveCategory">
+            <span>
+                <mat-icon color="primary">
+                    <i class="material-icons" id="info">info</i>
+                </mat-icon>
+                Questa sezione riflette le categorie come riportate in AD HOC, pertanto è solo in consultazione.
+            </span>            
             <div class="demo-tab-content">
                 <categories-tree 
-                [parentSubject]="parentSubject"
-                [data]="originalItemsDictionary" 
-                [categories]="categories"                 
-                [readOnly]="true"></categories-tree>
+                    [parentSubject]="parentSubject"
+                    [data]="originalItemsDictionary" 
+                    [categories]="categories"                 
+                    [readOnly]="true">
+                </categories-tree>
             </div>  
         </mat-tab>        
         <mat-tab label="Categorie disponibili">
+            <span>
+                <mat-icon color="primary">
+                    <i class="material-icons" id="info" >info</i>
+                </mat-icon>
+                Questa sezione riflette le categorie come riportate in AD HOC, pertanto è solo in consultazione.
+            </span>
             <div class="demo-tab-content">                
-                <modify-categories [(categories)]="categories" (saveCategories)="saveCategories($event)"></modify-categories>
+                <modify-categories [(categories)]="categories" (forceSave)="forceSave($event)" (saveCategories)="saveCategories($event)"></modify-categories>
             </div>
         </mat-tab>
-        <mat-tab label="Export">
+        <mat-tab label="Export" [disabled]="shouldSaveCategory">
+            <span>
+                <mat-icon color="primary">
+                    <i class="material-icons" id="info">info</i>
+                </mat-icon>
+                Export dell'albero delle categorie. Da decidere il formato e/o come utilizzare l'albero. 
+            </span>            
             <div class="demo-tab-content">
-                Export dell'albero delle categorie (Work in progress).
-                Da decidere il formato e/o come utilizzare l'albero. 
+                (Work in progress)
             </div>
         </mat-tab>
     </mat-tab-group>      
