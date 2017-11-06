@@ -1,6 +1,6 @@
 <span *ngIf="node && node.data.article && node.isActive">
     <h2>Cambia categorie per questo articolo</h2>
-    <h3>Le modifiche verranno applicate a tutti gli articoli del gruppo selezionato</h3>
+    <h3>Le modifiche verranno applicate solo all'articolo selezionato</h3>
     <dropdown-with-filter label="Categoria omogenea:"
         [reference]="node.data.article[ROOTLEVEL]" 
         [values]="categories[ROOTLEVEL]"

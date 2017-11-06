@@ -12,6 +12,6 @@ export class FilterOptionsByValuePipe implements PipeTransform {
     if (!value || value.length === 0){
       return values;
     }
-    return values.filter(v => v.value.toLowerCase().startsWith(value.toLowerCase()));    
+    return values.filter(v => v.value.toLowerCase().indexOf(value.toLowerCase()) > -1 );    
   }
 }

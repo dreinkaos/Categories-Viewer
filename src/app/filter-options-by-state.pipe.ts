@@ -9,8 +9,7 @@ export class FilterOptionsByStatePipe implements PipeTransform {
     if (!values)
       return [];
     if (state === undefined || state === null)
-      return values;
-    console.log(state);
+      return values;    
     return values.filter(v => v.active == state);    
   }
 

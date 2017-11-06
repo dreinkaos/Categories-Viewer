@@ -18,6 +18,7 @@ export class ModifyCategoriesComponent implements OnInit {
   obj: Object = Object;
   selectedRow: any;
   selectedCategory: string;
+  isActive = true;
   oldValue: string;
   modified: boolean = false;
   columnsTranslations: any[] = AppConfigurations.COLUMNS;

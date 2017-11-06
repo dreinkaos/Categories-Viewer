@@ -41,8 +41,8 @@ export class CategoriesTreeComponent implements OnInit {
   filterNodes(filter: string){
     if (filter.length > 2){
       this.treeComponent.treeModel.filterNodes((node) => {
-        var nodeText = this.transformText(node);
-        return nodeText.toLowerCase().startsWith(filter.toLowerCase());
+        var nodeText = this.transformText(node);        
+        return nodeText.toLowerCase().indexOf(filter.toLowerCase()) > -1;
       });
     }
     else{
